@@ -5449,33 +5449,6 @@ document.addEventListener('keydown', function(e) {
 });
 
 // ===============================
-// Detect DevTools Open
-// ===============================
-(function () {
-    function detectDevTools() {
-        const widthThreshold = window.outerWidth - window.innerWidth > 160;
-        const heightThreshold = window.outerHeight - window.innerHeight > 160;
-
-        if (widthThreshold || heightThreshold) {
-            document.body.innerHTML = `
-                <div style="
-                    display:flex;
-                    justify-content:center;
-                    align-items:center;
-                    height:100vh;
-                    font-size:30px;
-                    font-family:sans-serif;
-                    background:#000;
-                    color:#fff;">
-                    DevTools Detected
-                </div>`;
-        }
-    }
-
-    setInterval(detectDevTools, 1000);
-})();
-
-// ===============================
 // Disable Image Saving
 // ===============================
 document.querySelectorAll('img').forEach(img => {
