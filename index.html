@@ -3793,6 +3793,118 @@ themeBtn.addEventListener('click', () => {
         });
         renderFaq(activeCat);
     </script>
+    <script>
+// ===============================
+// Disable Right Click
+// ===============================
+document.addEventListener('contextmenu', e => e.preventDefault());
+
+// ===============================
+// Disable Text Selection
+// ===============================
+document.addEventListener('selectstart', e => e.preventDefault());
+
+// ===============================
+// Disable Copy / Cut / Paste
+// ===============================
+['copy', 'cut', 'paste'].forEach(evt => {
+    document.addEventListener(evt, e => {
+        e.preventDefault();
+        alert('Action blocked');
+    });
+});
+
+// ===============================
+// Disable Dragging Images
+// ===============================
+document.addEventListener('dragstart', e => e.preventDefault());
+
+// ===============================
+// Disable Common DevTools Keys
+// ===============================
+document.addEventListener('keydown', function(e) {
+
+    // F12
+    if (e.key === 'F12') {
+        e.preventDefault();
+    }
+
+    // Ctrl+Shift+I
+    if (e.ctrlKey && e.shiftKey && e.key === 'I') {
+        e.preventDefault();
+    }
+
+    // Ctrl+Shift+J
+    if (e.ctrlKey && e.shiftKey && e.key === 'J') {
+        e.preventDefault();
+    }
+
+    // Ctrl+Shift+C
+    if (e.ctrlKey && e.shiftKey && e.key === 'C') {
+        e.preventDefault();
+    }
+
+    // Ctrl+U (View Source)
+    if (e.ctrlKey && e.key === 'u') {
+        e.preventDefault();
+    }
+
+    // Ctrl+S (Save Page)
+    if (e.ctrlKey && e.key === 's') {
+        e.preventDefault();
+    }
+
+    // Ctrl+P (Print)
+    if (e.ctrlKey && e.key === 'p') {
+        e.preventDefault();
+    }
+});
+
+// ===============================
+// Detect DevTools Open
+// ===============================
+(function () {
+    function detectDevTools() {
+        const widthThreshold = window.outerWidth - window.innerWidth > 160;
+        const heightThreshold = window.outerHeight - window.innerHeight > 160;
+
+        if (widthThreshold || heightThreshold) {
+            document.body.innerHTML = `
+                <div style="
+                    display:flex;
+                    justify-content:center;
+                    align-items:center;
+                    height:100vh;
+                    font-size:30px;
+                    font-family:sans-serif;
+                    background:#000;
+                    color:#fff;">
+                    DevTools Detected
+                </div>`;
+        }
+    }
+
+    setInterval(detectDevTools, 1000);
+})();
+
+// ===============================
+// Disable Image Saving
+// ===============================
+document.querySelectorAll('img').forEach(img => {
+    img.setAttribute('draggable', 'false');
+});
+
+// ===============================
+// Blur Page When Tab Hidden
+// ===============================
+document.addEventListener("visibilitychange", () => {
+    if (document.hidden) {
+        document.body.style.filter = "blur(10px)";
+    } else {
+        document.body.style.filter = "blur(0)";
+    }
+});
+</script>
 </body>
 
 </html>
