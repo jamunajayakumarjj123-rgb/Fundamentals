@@ -1,0 +1,1363 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CodePad | Fundamentals+</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:ital,wght@0,400;0,500;0,600;0,700;1,400&family=League+Spartan:wght@600;700;800;900&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg-primary: #0d0d10;
+            --bg-secondary: #13131a;
+            --bg-tertiary: #1a1a24;
+            --bg-card: #16161f;
+            --bg-hover: #1e1e2e;
+            --border: #2a2a3d;
+            --border-light: #323248;
+            --text-primary: #e8e8f0;
+            --text-secondary: #8888a8;
+            --text-muted: #555570;
+            --accent: #f97316;
+            --accent-dim: rgba(249,115,22,0.15);
+            --accent-glow: rgba(249,115,22,0.35);
+            --green: #22c55e;
+            --green-dim: rgba(34,197,94,0.15);
+            --red: #ef4444;
+            --red-dim: rgba(239,68,68,0.15);
+            --blue: #3b82f6;
+            --blue-dim: rgba(59,130,246,0.15);
+            --purple: #a78bfa;
+            --yellow: #eab308;
+            --topnav-h: 48px;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background: var(--bg-primary);
+            color: var(--text-primary);
+            height: 100vh;
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+        }
+
+        /* ── TOP NAV ── */
+        .topnav {
+            height: var(--topnav-h);
+            background: var(--bg-secondary);
+            border-bottom: 1px solid var(--border);
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0 16px;
+            flex-shrink: 0;
+            z-index: 100;
+            gap: 12px;
+        }
+
+        .topnav-left { display: flex; align-items: center; gap: 12px; }
+
+        .logo {
+            font-family: 'League Spartan', sans-serif;
+            font-weight: 800;
+            font-size: 17px;
+            color: var(--accent);
+            letter-spacing: -0.3px;
+            white-space: nowrap;
+            line-height: 1;
+        }
+        .logo span { color: var(--text-primary); }
+
+        .nav-sep { width: 1px; height: 20px; background: var(--border); flex-shrink: 0; }
+
+        .nav-badge {
+            padding: 3px 10px;
+            border-radius: 20px;
+            font-size: 11px;
+            font-weight: 600;
+            background: var(--accent-dim);
+            color: var(--accent);
+            border: 1px solid rgba(249,115,22,0.25);
+            white-space: nowrap;
+        }
+
+        .topnav-right { display: flex; align-items: center; gap: 8px; }
+
+        .icon-btn {
+            width: 30px; height: 30px;
+            border-radius: 7px;
+            background: none;
+            border: 1px solid var(--border);
+            color: var(--text-muted);
+            cursor: pointer;
+            display: flex; align-items: center; justify-content: center;
+            transition: all 0.2s;
+            flex-shrink: 0;
+        }
+        .icon-btn:hover { background: var(--bg-hover); color: var(--text-primary); border-color: var(--border-light); }
+        .icon-btn svg { pointer-events: none; }
+
+        .lang-select {
+            background: var(--bg-tertiary);
+            border: 1px solid var(--border);
+            color: var(--text-primary);
+            padding: 5px 28px 5px 10px;
+            border-radius: 7px;
+            font-size: 12px;
+            font-family: 'Inter', sans-serif;
+            cursor: pointer;
+            outline: none;
+            appearance: none;
+            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10' height='6'%3E%3Cpath d='M0 0l5 6 5-6z' fill='%23888'/%3E%3C/svg%3E");
+            background-repeat: no-repeat;
+            background-position: right 8px center;
+            transition: border-color 0.2s;
+        }
+        .lang-select:hover { border-color: var(--accent); }
+
+        .theme-label { font-size: 11px; color: var(--text-secondary); }
+        .theme-toggle {
+            width: 32px; height: 18px;
+            border-radius: 9px;
+            background: var(--border-light);
+            border: none; cursor: pointer;
+            position: relative; transition: background 0.3s;
+            padding: 0; flex-shrink: 0;
+        }
+        .theme-toggle::after {
+            content: '';
+            position: absolute;
+            width: 14px; height: 14px;
+            border-radius: 50%;
+            top: 2px; left: 2px;
+            background: var(--text-muted);
+            transition: all 0.3s;
+        }
+        body.light .theme-toggle { background: var(--accent); }
+        body.light .theme-toggle::after { transform: translateX(14px); background: white; }
+
+        .avatar {
+            width: 28px; height: 28px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, var(--accent), #f59e0b);
+            display: flex; align-items: center; justify-content: center;
+            font-size: 11px; font-weight: 700; color: white;
+            cursor: pointer; flex-shrink: 0;
+        }
+
+        /* ── TOOLBAR STRIP ── */
+        .toolbar-strip {
+            height: 42px;
+            background: var(--bg-secondary);
+            border-bottom: 1px solid var(--border);
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0 14px;
+            flex-shrink: 0;
+            gap: 8px;
+        }
+
+        .toolbar-left { display: flex; align-items: center; gap: 8px; }
+        .toolbar-right { display: flex; align-items: center; gap: 6px; }
+
+        .file-tabs { display: flex; align-items: center; gap: 4px; }
+
+        .file-tab {
+            display: flex; align-items: center; gap: 6px;
+            padding: 4px 12px;
+            border-radius: 6px;
+            font-size: 11.5px;
+            color: var(--text-muted);
+            background: none;
+            border: 1px solid transparent;
+            cursor: pointer;
+            transition: all 0.2s;
+            font-family: 'JetBrains Mono', monospace;
+            font-weight: 500;
+        }
+        .file-tab.active {
+            background: var(--bg-primary);
+            color: var(--text-primary);
+            border-color: var(--border);
+        }
+        .file-tab:hover:not(.active) { color: var(--text-secondary); background: var(--bg-hover); }
+
+        .dot { width: 7px; height: 7px; border-radius: 50%; background: var(--accent); flex-shrink: 0; }
+
+        .run-btn {
+            display: flex; align-items: center; gap: 6px;
+            padding: 6px 16px;
+            border-radius: 7px;
+            background: var(--green);
+            color: white; border: none; cursor: pointer;
+            font-size: 12px; font-weight: 600;
+            font-family: 'Inter', sans-serif;
+            transition: all 0.2s;
+            letter-spacing: 0.3px;
+            white-space: nowrap;
+        }
+        .run-btn:hover { background: #16a34a; transform: translateY(-1px); box-shadow: 0 4px 14px rgba(34,197,94,0.35); }
+        .run-btn:active { transform: none; box-shadow: none; }
+        .run-btn.loading { background: var(--text-muted); cursor: not-allowed; transform: none; box-shadow: none; }
+        .run-btn svg { pointer-events: none; }
+
+        /* ── MAIN AREA ── */
+        .main-area {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            overflow: hidden;
+            position: relative;
+        }
+
+        /* ── CODE EDITOR ── */
+        .editor-area {
+            flex: 1;
+            display: flex;
+            overflow: hidden;
+            background: var(--bg-primary);
+            min-height: 120px;
+        }
+
+        .line-numbers {
+            width: 52px;
+            background: var(--bg-secondary);
+            border-right: 1px solid var(--border);
+            padding: 16px 0;
+            text-align: right;
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 13px;
+            line-height: 1.65;
+            color: var(--text-muted);
+            user-select: none;
+            overflow: hidden;
+            flex-shrink: 0;
+        }
+        .line-numbers span { display: block; padding-right: 12px; }
+
+        .code-editor {
+            flex: 1;
+            background: var(--bg-primary);
+            color: var(--text-primary);
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 13px;
+            line-height: 1.65;
+            padding: 16px 20px;
+            border: none; outline: none;
+            resize: none;
+            tab-size: 4;
+            overflow: auto;
+            white-space: pre;
+            caret-color: var(--accent);
+        }
+        .code-editor::selection { background: rgba(249,115,22,0.25); }
+        .code-editor::-webkit-scrollbar { width: 6px; height: 6px; }
+        .code-editor::-webkit-scrollbar-track { background: var(--bg-secondary); }
+        .code-editor::-webkit-scrollbar-thumb { background: var(--border); border-radius: 3px; }
+
+        /* ── VERTICAL RESIZE HANDLE ── */
+        .v-resize-handle {
+            height: 5px;
+            background: var(--border);
+            cursor: row-resize;
+            flex-shrink: 0;
+            position: relative;
+            transition: background 0.2s;
+            display: flex; align-items: center; justify-content: center;
+        }
+        .v-resize-handle:hover, .v-resize-handle.dragging { background: var(--accent); }
+        .v-resize-handle::before {
+            content: '';
+            width: 32px; height: 3px;
+            border-radius: 2px;
+            background: var(--text-muted);
+            transition: background 0.2s;
+        }
+        .v-resize-handle:hover::before, .v-resize-handle.dragging::before { background: white; }
+
+        /* ── BOTTOM PANEL ── */
+        .bottom-panel {
+            background: var(--bg-secondary);
+            border-top: 1px solid var(--border);
+            display: flex;
+            flex-direction: column;
+            flex-shrink: 0;
+            min-height: 80px;
+            max-height: calc(100vh - var(--topnav-h) - 42px - 120px);
+        }
+
+        .bottom-toolbar {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0 14px;
+            height: 38px;
+            border-bottom: 1px solid var(--border);
+            flex-shrink: 0;
+            gap: 8px;
+        }
+
+        .bottom-tabs { display: flex; gap: 4px; align-items: center; }
+
+        .bottom-tab {
+            padding: 4px 12px;
+            border-radius: 6px;
+            font-size: 11.5px;
+            font-weight: 500;
+            color: var(--text-muted);
+            cursor: pointer;
+            border: 1px solid transparent;
+            background: none;
+            transition: all 0.2s;
+            display: flex; align-items: center; gap: 6px;
+            font-family: 'Inter', sans-serif;
+            white-space: nowrap;
+        }
+        .bottom-tab.active {
+            color: var(--purple);
+            background: rgba(167,139,250,0.1);
+            border-color: rgba(167,139,250,0.2);
+        }
+        .bottom-tab:hover:not(.active) { color: var(--text-secondary); background: var(--bg-hover); }
+        .bottom-tab svg { pointer-events: none; }
+
+        .bottom-actions { display: flex; align-items: center; gap: 6px; }
+
+        .clear-btn {
+            display: flex; align-items: center; gap: 5px;
+            padding: 4px 10px;
+            border-radius: 6px;
+            font-size: 11px; font-weight: 500;
+            color: var(--text-muted);
+            background: none;
+            border: 1px solid var(--border);
+            cursor: pointer; transition: all 0.2s;
+            font-family: 'Inter', sans-serif;
+        }
+        .clear-btn:hover { color: var(--text-primary); background: var(--bg-hover); }
+        .clear-btn svg { pointer-events: none; }
+
+        /* ── BOTTOM CONTENT ── */
+        .bottom-content {
+            flex: 1;
+            overflow: hidden;
+            display: flex;
+        }
+
+        .panel-pane {
+            display: none;
+            flex: 1;
+            overflow: hidden;
+        }
+        .panel-pane.active { display: flex; }
+
+        /* Input pane */
+        .input-pane {
+            flex-direction: column;
+            padding: 12px 14px;
+            gap: 8px;
+        }
+        .input-label {
+            font-size: 10.5px;
+            font-weight: 600;
+            color: var(--text-muted);
+            text-transform: uppercase;
+            letter-spacing: 0.6px;
+            flex-shrink: 0;
+        }
+        .stdin-area {
+            flex: 1;
+            background: var(--bg-primary);
+            border: 1px solid var(--border);
+            border-radius: 7px;
+            padding: 10px 12px;
+            color: var(--text-primary);
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 12.5px;
+            line-height: 1.6;
+            outline: none;
+            resize: none;
+            transition: border-color 0.2s;
+        }
+        .stdin-area:focus { border-color: var(--accent); }
+        .stdin-area::placeholder { color: var(--text-muted); }
+        .stdin-area::-webkit-scrollbar { width: 4px; }
+        .stdin-area::-webkit-scrollbar-thumb { background: var(--border); border-radius: 2px; }
+
+        /* Output pane */
+        .output-pane {
+            flex-direction: column;
+            overflow: hidden;
+        }
+
+        .output-scroll {
+            flex: 1;
+            overflow-y: auto;
+            padding: 12px 14px;
+        }
+        .output-scroll::-webkit-scrollbar { width: 4px; }
+        .output-scroll::-webkit-scrollbar-thumb { background: var(--border); border-radius: 2px; }
+
+        .output-empty {
+            color: var(--text-muted);
+            font-size: 12px;
+            font-family: 'JetBrains Mono', monospace;
+            padding: 10px 0;
+            display: flex; align-items: center; gap: 8px;
+        }
+
+        .output-status {
+            display: flex; align-items: center; gap: 8px;
+            margin-bottom: 10px;
+            flex-wrap: wrap;
+        }
+
+        .status-badge {
+            padding: 3px 10px;
+            border-radius: 4px;
+            font-size: 11px;
+            font-weight: 700;
+            letter-spacing: 0.5px;
+        }
+        .status-pass { background: var(--green-dim); color: var(--green); }
+        .status-fail { background: var(--red-dim); color: var(--red); }
+        .status-running { background: var(--blue-dim); color: var(--blue); }
+        .status-err { background: rgba(239,68,68,0.08); color: #f87171; }
+
+        .meta-info {
+            font-size: 11px;
+            color: var(--text-muted);
+            display: flex; align-items: center; gap: 10px;
+        }
+        .meta-chip {
+            display: flex; align-items: center; gap: 4px;
+            background: var(--bg-tertiary);
+            border: 1px solid var(--border);
+            border-radius: 4px;
+            padding: 2px 8px;
+            font-size: 10.5px;
+        }
+
+        .output-block {
+            margin-bottom: 10px;
+        }
+        .output-block-label {
+            font-size: 10.5px;
+            font-weight: 700;
+            color: var(--text-muted);
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            margin-bottom: 5px;
+        }
+        .output-block-content {
+            background: var(--bg-primary);
+            border: 1px solid var(--border);
+            border-radius: 6px;
+            padding: 8px 12px;
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 12.5px;
+            color: var(--text-primary);
+            white-space: pre-wrap;
+            word-break: break-all;
+            line-height: 1.6;
+        }
+        .output-block-content.err { color: #f87171; border-color: var(--red-dim); }
+
+        /* ── SPINNER ── */
+        @keyframes spin { to { transform: rotate(360deg); } }
+        .spinner {
+            width: 13px; height: 13px;
+            border: 2px solid rgba(255,255,255,0.3);
+            border-top-color: white;
+            border-radius: 50%;
+            animation: spin 0.8s linear infinite;
+            display: inline-block;
+        }
+        .spinner-svg { animation: spin 0.9s linear infinite; display: inline-block; vertical-align: middle; }
+
+        /* ── TOAST ── */
+        .toast {
+            position: fixed;
+            top: 58px; left: 50%;
+            transform: translateX(-50%) translateY(-10px);
+            background: var(--green);
+            color: white;
+            padding: 10px 22px;
+            border-radius: 8px;
+            font-size: 13px; font-weight: 600;
+            box-shadow: 0 6px 24px rgba(34,197,94,0.4);
+            opacity: 0; transition: all 0.35s;
+            z-index: 9999; pointer-events: none;
+        }
+        .toast.show { opacity: 1; transform: translateX(-50%) translateY(0); }
+        .toast.err { background: var(--red); box-shadow: 0 6px 24px rgba(239,68,68,0.3); }
+
+        /* ── STATUS BAR ── */
+        .statusbar {
+            height: 22px;
+            background: var(--accent);
+            display: flex; align-items: center;
+            padding: 0 14px;
+            flex-shrink: 0;
+            gap: 14px;
+        }
+        .statusbar-item {
+            font-size: 10.5px;
+            font-weight: 600;
+            color: rgba(255,255,255,0.85);
+            display: flex; align-items: center; gap: 5px;
+        }
+        .statusbar-item svg { opacity: 0.7; pointer-events: none; }
+        .statusbar-sep { width: 1px; height: 12px; background: rgba(255,255,255,0.25); }
+        .statusbar-right { margin-left: auto; }
+
+        /* ── LIGHT THEME ── */
+        body.light {
+            --bg-primary: #f8f8fc;
+            --bg-secondary: #ffffff;
+            --bg-tertiary: #f0f0f8;
+            --bg-card: #fafafa;
+            --bg-hover: #ebebf5;
+            --border: #dcdce8;
+            --border-light: #c8c8da;
+            --text-primary: #1a1a2e;
+            --text-secondary: #4a4a6a;
+            --text-muted: #9898b8;
+            --green: #16a34a;
+            --green-dim: rgba(22,163,74,0.12);
+            --red: #dc2626;
+            --red-dim: rgba(220,38,38,0.12);
+            --blue: #2563eb;
+            --blue-dim: rgba(37,99,235,0.12);
+            --purple: #7c3aed;
+        }
+        body.light .code-editor { background: #f5f5ff; color: #1a1a2e; }
+        body.light .line-numbers { background: #ebebf5; }
+        body.light .statusbar { background: var(--accent); }
+
+        /* ── SCROLLBARS GLOBAL ── */
+        ::-webkit-scrollbar { width: 6px; height: 6px; }
+        ::-webkit-scrollbar-track { background: transparent; }
+        ::-webkit-scrollbar-thumb { background: var(--border); border-radius: 3px; }
+        ::-webkit-scrollbar-thumb:hover { background: var(--border-light); }
+
+        /* ── BACK BUTTON ── */
+        .back-btn {
+            display: flex; align-items: center; gap: 5px;
+            padding: 4px 10px;
+            border-radius: 6px;
+            font-size: 11.5px; font-weight: 500;
+            color: var(--text-secondary);
+            background: none;
+            border: 1px solid var(--border);
+            cursor: pointer; transition: all 0.2s;
+            font-family: 'Inter', sans-serif;
+            text-decoration: none;
+            white-space: nowrap;
+        }
+        .back-btn:hover {
+            background: var(--bg-hover);
+            color: var(--text-primary);
+            border-color: var(--border-light);
+        }
+        .back-btn svg { pointer-events: none; flex-shrink: 0; }
+
+        /* ── RESET MODAL ── */
+        .modal-overlay {
+            position: fixed; inset: 0;
+            background: rgba(0,0,0,0.6);
+            backdrop-filter: blur(6px);
+            -webkit-backdrop-filter: blur(6px);
+            z-index: 20000;
+            display: none;
+            align-items: center;
+            justify-content: center;
+        }
+        .modal-overlay.show { display: flex; }
+
+        @keyframes modalIn {
+            from { opacity: 0; transform: translateY(16px) scale(0.97); }
+            to   { opacity: 1; transform: translateY(0) scale(1); }
+        }
+        @keyframes overlayIn {
+            from { opacity: 0; }
+            to   { opacity: 1; }
+        }
+        .modal-overlay.show { animation: overlayIn 0.2s ease; }
+
+        .modal-box {
+            background: var(--bg-secondary);
+            border: 1px solid var(--border-light);
+            border-radius: 16px;
+            padding: 32px 28px 24px;
+            width: 360px;
+            max-width: 90vw;
+            box-shadow: 0 28px 70px rgba(0,0,0,0.55), 0 0 0 1px rgba(255,255,255,0.04);
+            text-align: center;
+            animation: modalIn 0.25s cubic-bezier(0.34,1.4,0.64,1);
+        }
+
+        .modal-icon-wrap {
+            width: 56px; height: 56px;
+            border-radius: 14px;
+            background: rgba(239,68,68,0.12);
+            border: 1px solid rgba(239,68,68,0.2);
+            display: flex; align-items: center; justify-content: center;
+            margin: 0 auto 16px;
+        }
+
+        .modal-title {
+            font-family: 'League Spartan', sans-serif;
+            font-size: 20px;
+            font-weight: 700;
+            color: var(--text-primary);
+            margin-bottom: 8px;
+            letter-spacing: -0.2px;
+        }
+
+        .modal-desc {
+            font-size: 13px;
+            color: var(--text-secondary);
+            line-height: 1.65;
+            margin-bottom: 26px;
+        }
+        .modal-desc strong { color: var(--text-primary); }
+
+        .modal-btns {
+            display: flex; gap: 10px;
+        }
+
+        .modal-btn {
+            flex: 1;
+            padding: 10px 16px;
+            border-radius: 9px;
+            font-size: 13px; font-weight: 600;
+            cursor: pointer; transition: all 0.2s;
+            font-family: 'Inter', sans-serif;
+            border: none;
+        }
+        .modal-btn-cancel {
+            background: var(--bg-tertiary);
+            color: var(--text-secondary);
+            border: 1px solid var(--border);
+        }
+        .modal-btn-cancel:hover { background: var(--bg-hover); color: var(--text-primary); }
+        .modal-btn-confirm {
+            background: var(--red);
+            color: white;
+        }
+        .modal-btn-confirm:hover {
+            background: #dc2626;
+            transform: translateY(-1px);
+            box-shadow: 0 4px 14px rgba(239,68,68,0.4);
+        }
+
+        /* ── RESIZING CURSOR ── */
+        body.row-resizing { cursor: row-resize !important; user-select: none; }
+        body.row-resizing * { cursor: row-resize !important; }
+
+        /* ── MOBILE ── */
+        @media (max-width: 600px) {
+            .topnav { padding: 0 10px; gap: 8px; }
+            .logo { font-size: 13px; }
+            .theme-label { display: none; }
+            .nav-sep { display: none; }
+            .nav-badge { display: none; }
+            .file-tabs { display: none; }
+        }
+    </style>
+</head>
+<body>
+
+<!-- RESET CONFIRM MODAL -->
+<div class="modal-overlay" id="reset-modal">
+    <div class="modal-box">
+        <div class="modal-icon-wrap">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="var(--red)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <polyline points="1,4 1,10 7,10"/>
+                <path d="M3.51 15a9 9 0 1 0 .49-3.5"/>
+            </svg>
+        </div>
+        <div class="modal-title">Reset to Template?</div>
+        <div class="modal-desc">
+            Your current code will be <strong>permanently lost</strong> and replaced with the default template for this language.
+        </div>
+        <div class="modal-btns">
+            <button class="modal-btn modal-btn-cancel" onclick="closeResetModal()">Keep Code</button>
+            <button class="modal-btn modal-btn-confirm" onclick="confirmReset()">Yes, Reset</button>
+        </div>
+    </div>
+</div>
+
+<!-- TOAST -->
+<div class="toast" id="toast"></div>
+
+<!-- TOP NAV -->
+<nav class="topnav">
+    <div class="topnav-left">
+        <div class="logo"><span onclick="window.location.href='dashboard.html';">fundamentals</span><span style="color:var(--accent)"></span></div>
+        <div class="nav-sep"></div>
+        <div class="nav-badge">
+            <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" style="display:inline;vertical-align:middle;margin-right:4px"><polyline points="16,18 22,12 16,6"/><polyline points="8,6 2,12 8,18"/></svg>
+            CodePad
+        </div>
+    </div>
+    <div class="topnav-right">
+        <span class="theme-label" id="theme-label">🌙 Dark</span>
+        <button class="theme-toggle" id="theme-toggle" onclick="toggleTheme()" title="Toggle theme"></button>
+        <div class="avatar" title="User">U</div>
+    </div>
+</nav>
+
+<!-- TOOLBAR STRIP -->
+<div class="toolbar-strip">
+    <div class="toolbar-left">
+        <a class="back-btn" href="dashboard.html" title="Back to Dashboard">
+            <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="15,18 9,12 15,6"/></svg>
+            Dashboard
+        </a>
+        <div class="nav-sep" style="height:18px;"></div>
+        <div class="file-tabs">
+            <div class="file-tab active" id="main-tab">
+                <div class="dot"></div>
+                <span id="tab-name">main.cpp</span>
+            </div>
+        </div>
+        <select class="lang-select" id="lang-select" onchange="changeLang(this.value)" title="Select language">
+            <option value="54">C++ 17</option>
+            <option value="50">C</option>
+            <option value="62">Java</option>
+            <option value="71">Python 3</option>
+            <option value="63">JavaScript</option>
+            <option value="83">Swift</option>
+            <option value="78">Kotlin</option>
+        </select>
+        <button class="icon-btn" onclick="copyCode()" title="Copy code">
+            <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
+        </button>
+        <button class="icon-btn" onclick="resetCode()" title="Reset to template">
+            <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="1,4 1,10 7,10"/><path d="M3.51 15a9 9 0 1 0 .49-3.5"/></svg>
+        </button>
+        <button class="icon-btn" onclick="toggleFullscreen()" title="Toggle fullscreen" id="fs-btn">
+            <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="15,3 21,3 21,9"/><polyline points="9,21 3,21 3,15"/><line x1="21" y1="3" x2="14" y2="10"/><line x1="3" y1="21" x2="10" y2="14"/></svg>
+        </button>
+    </div>
+    <div class="toolbar-right">
+        <button class="run-btn" id="run-btn" onclick="runCode()">
+            <svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor"><polygon points="5,3 19,12 5,21"/></svg>
+            Run Code
+        </button>
+    </div>
+</div>
+
+<!-- MAIN AREA -->
+<div class="main-area" id="main-area">
+
+    <!-- CODE EDITOR -->
+    <div class="editor-area" id="editor-area">
+        <div class="line-numbers" id="line-numbers"></div>
+        <textarea
+            class="code-editor"
+            id="code-editor"
+            spellcheck="false"
+            oninput="updateLineNumbers(); markUnsaved();"
+            onkeydown="handleTabKey(event)"
+            onscroll="syncScroll(this)"
+            placeholder="// Start coding here..."></textarea>
+    </div>
+
+    <!-- VERTICAL RESIZE HANDLE -->
+    <div class="v-resize-handle" id="v-resizer" title="Drag to resize"></div>
+
+    <!-- BOTTOM PANEL -->
+    <div class="bottom-panel" id="bottom-panel">
+
+        <!-- BOTTOM TOOLBAR -->
+        <div class="bottom-toolbar">
+            <div class="bottom-tabs">
+                <button class="bottom-tab active" id="tab-input" onclick="switchBottomTab('input')">
+                    <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9,10 4,15 9,20"/><path d="M20 4v7a4 4 0 0 1-4 4H4"/></svg>
+                    Input (stdin)
+                </button>
+                <button class="bottom-tab" id="tab-output" onclick="switchBottomTab('output')">
+                    <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="22,12 18,12 15,21 9,3 6,12 2,12"/></svg>
+                    Output
+                    <span id="output-dot" style="display:none;width:6px;height:6px;border-radius:50%;background:var(--green);flex-shrink:0;"></span>
+                </button>
+            </div>
+            <div class="bottom-actions">
+                <button class="clear-btn" onclick="clearPanel()" title="Clear current panel">
+                    <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="3,6 5,6 21,6"/><path d="M19 6l-1 14a2 2 0 0 1-2 2H8a2 2 0 0 1-2-2L5 6"/><path d="M10 11v6"/><path d="M14 11v6"/></svg>
+                    Clear
+                </button>
+            </div>
+        </div>
+
+        <!-- BOTTOM CONTENT -->
+        <div class="bottom-content">
+
+            <!-- INPUT PANE -->
+            <div class="panel-pane active input-pane" id="pane-input">
+                <div class="input-label">Standard Input (stdin)</div>
+                <textarea
+                    class="stdin-area"
+                    id="stdin-area"
+                    placeholder="Enter input for your program here...&#10;&#10;Example:&#10;5&#10;1 2 3 4 5"
+                    spellcheck="false"></textarea>
+            </div>
+
+            <!-- OUTPUT PANE -->
+            <div class="panel-pane output-pane" id="pane-output">
+                <div class="output-scroll" id="output-scroll">
+                    <div class="output-empty" id="output-empty">
+                        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="22,12 18,12 15,21 9,3 6,12 2,12"/></svg>
+                        Run your code to see output here
+                    </div>
+                    <div id="output-content" style="display:none;"></div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+</div>
+
+<!-- STATUS BAR -->
+<div class="statusbar">
+    <div class="statusbar-item">
+        <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="16,18 22,12 16,6"/><polyline points="8,6 2,12 8,18"/></svg>
+        <span id="sb-lang">C++ 17</span>
+    </div>
+    <div class="statusbar-sep"></div>
+    <div class="statusbar-item">
+        <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+        <span id="sb-lines">1 line</span>
+    </div>
+    <div class="statusbar-sep"></div>
+    <div class="statusbar-item">
+        <span id="sb-cursor">Ln 1, Col 1</span>
+    </div>
+    <div class="statusbar-sep"></div>
+    <div class="statusbar-item" id="sb-saved">
+        <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M19 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11l5 5v11a2 2 0 0 1-2 2z"/><polyline points="17,21 17,13 7,13 7,21"/><polyline points="7,3 7,8 15,8"/></svg>
+        Saved
+    </div>
+    <div class="statusbar-item statusbar-right" id="sb-status" style="color:rgba(255,255,255,0.7);">
+        Ready
+    </div>
+</div>
+
+<script>
+// ═══════════════════════════════════════════════════════════════
+// LANGUAGE CONFIG
+// ═══════════════════════════════════════════════════════════════
+const LANG_CONFIG = {
+    '54': {
+        name: 'C++ 17', ext: 'cpp', tab: 'main.cpp',
+        template: `#include <bits/stdc++.h>\nusing namespace std;\n\nint main() {\n    // Your code here\n    int n;\n    cin >> n;\n    cout << "Hello, World! n = " << n << endl;\n    return 0;\n}`
+    },
+    '50': {
+        name: 'C', ext: 'c', tab: 'main.c',
+        template: `#include <stdio.h>\n\nint main() {\n    int n;\n    scanf("%d", &n);\n    printf("Hello, World! n = %d\\n", n);\n    return 0;\n}`
+    },
+    '62': {
+        name: 'Java', ext: 'java', tab: 'Main.java',
+        template: `import java.util.Scanner;\n\npublic class Main {\n    public static void main(String[] args) {\n        Scanner sc = new Scanner(System.in);\n        int n = sc.nextInt();\n        System.out.println("Hello, World! n = " + n);\n    }\n}`
+    },
+    '71': {
+        name: 'Python 3', ext: 'py', tab: 'main.py',
+        template: `n = int(input())\nprint(f"Hello, World! n = {n}")`
+    },
+    '63': {
+        name: 'JavaScript', ext: 'js', tab: 'main.js',
+        template: `const lines = require('fs').readFileSync('/dev/stdin','utf8').trim().split('\\n');\nconst n = parseInt(lines[0]);\nconsole.log(\`Hello, World! n = \${n}\`);`
+    },
+    '83': {
+        name: 'Swift', ext: 'swift', tab: 'main.swift',
+        template: `import Foundation\n\nif let line = readLine(), let n = Int(line) {\n    print("Hello, World! n = \\(n)")\n}`
+    },
+    '78': {
+        name: 'Kotlin', ext: 'kt', tab: 'Main.kt',
+        template: `fun main() {\n    val n = readLine()!!.trim().toInt()\n    println("Hello, World! n = \$n")\n}`
+    }
+};
+
+// ═══════════════════════════════════════════════════════════════
+// STATE
+// ═══════════════════════════════════════════════════════════════
+let currentLang = '54';
+let saved = true;
+let activeTab = 'input';
+const THEME_KEY = 'cf_theme';
+const CODE_KEY = 'codepad_code_';
+
+// ═══════════════════════════════════════════════════════════════
+// INIT
+// ═══════════════════════════════════════════════════════════════
+function init() {
+    loadTheme();
+    loadCode();
+    updateLineNumbers();
+    setupVerticalResize();
+    setupCursorTracking();
+}
+
+// ═══════════════════════════════════════════════════════════════
+// THEME
+// ═══════════════════════════════════════════════════════════════
+function toggleTheme() {
+    const light = document.body.classList.toggle('light');
+    document.getElementById('theme-label').textContent = light ? '☀️ Light' : '🌙 Dark';
+    try { localStorage.setItem(THEME_KEY, light ? 'light' : 'dark'); } catch(e) {}
+}
+function loadTheme() {
+    try {
+        if (localStorage.getItem(THEME_KEY) === 'light') {
+            document.body.classList.add('light');
+            document.getElementById('theme-label').textContent = '☀️ Light';
+        }
+    } catch(e) {}
+}
+
+// ═══════════════════════════════════════════════════════════════
+// LANGUAGE
+// ═══════════════════════════════════════════════════════════════
+function changeLang(id) {
+    saveCurrentCode();
+    currentLang = id;
+    const cfg = LANG_CONFIG[id];
+    document.getElementById('tab-name').textContent = cfg.tab;
+    document.getElementById('sb-lang').textContent = cfg.name;
+    loadCode();
+    updateLineNumbers();
+    clearOutputUI();
+}
+
+function saveCurrentCode() {
+    try {
+        const code = document.getElementById('code-editor').value;
+        localStorage.setItem(CODE_KEY + currentLang, code);
+    } catch(e) {}
+}
+
+function loadCode() {
+    const cfg = LANG_CONFIG[currentLang];
+    let code = '';
+    try { code = localStorage.getItem(CODE_KEY + currentLang) || ''; } catch(e) {}
+    if (!code) code = cfg.template;
+    document.getElementById('code-editor').value = code;
+    saved = true;
+    updateSavedStatus(true);
+}
+
+function resetCode() {
+    openResetModal();
+}
+
+function openResetModal() {
+    document.getElementById('reset-modal').classList.add('show');
+}
+
+function closeResetModal() {
+    document.getElementById('reset-modal').classList.remove('show');
+}
+
+function confirmReset() {
+    closeResetModal();
+    const cfg = LANG_CONFIG[currentLang];
+    document.getElementById('code-editor').value = cfg.template;
+    try { localStorage.removeItem(CODE_KEY + currentLang); } catch(e) {}
+    saved = true;
+    updateSavedStatus(true);
+    updateLineNumbers();
+    showToast('Code reset to template');
+}
+
+function markUnsaved() {
+    if (saved) {
+        saved = false;
+        updateSavedStatus(false);
+    }
+    saveCurrentCode();
+    saved = true;
+    updateSavedStatus(true);
+}
+
+function updateSavedStatus(isSaved) {
+    const el = document.getElementById('sb-saved');
+    if (isSaved) {
+        el.innerHTML = `<svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M19 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11l5 5v11a2 2 0 0 1-2 2z"/><polyline points="17,21 17,13 7,13 7,21"/><polyline points="7,3 7,8 15,8"/></svg> Saved`;
+    } else {
+        el.innerHTML = `<svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg> Unsaved`;
+    }
+}
+
+// ═══════════════════════════════════════════════════════════════
+// EDITOR UTILITIES
+// ═══════════════════════════════════════════════════════════════
+function updateLineNumbers() {
+    const ta = document.getElementById('code-editor');
+    const lines = ta.value.split('\n').length;
+    const ln = document.getElementById('line-numbers');
+    let html = '';
+    for (let i = 1; i <= lines; i++) html += `<span>${i}</span>`;
+    ln.innerHTML = html;
+
+    const lineCount = lines;
+    document.getElementById('sb-lines').textContent = `${lineCount} line${lineCount !== 1 ? 's' : ''}`;
+}
+
+function handleTabKey(e) {
+    if (e.key === 'Tab') {
+        e.preventDefault();
+        const ta = e.target, s = ta.selectionStart;
+        ta.value = ta.value.substring(0, s) + '    ' + ta.value.substring(ta.selectionEnd);
+        ta.selectionStart = ta.selectionEnd = s + 4;
+        updateLineNumbers();
+    }
+    if ((e.ctrlKey || e.metaKey) && e.key === 'Enter') {
+        e.preventDefault();
+        runCode();
+    }
+    if ((e.ctrlKey || e.metaKey) && e.key === 's') {
+        e.preventDefault();
+        saveCurrentCode();
+        showToast('Code saved');
+    }
+}
+
+function syncScroll(ta) {
+    document.getElementById('line-numbers').scrollTop = ta.scrollTop;
+}
+
+function setupCursorTracking() {
+    const ta = document.getElementById('code-editor');
+    function updateCursor() {
+        const val = ta.value;
+        const pos = ta.selectionStart;
+        const lines = val.substring(0, pos).split('\n');
+        const ln = lines.length;
+        const col = lines[lines.length - 1].length + 1;
+        document.getElementById('sb-cursor').textContent = `Ln ${ln}, Col ${col}`;
+    }
+    ta.addEventListener('click', updateCursor);
+    ta.addEventListener('keyup', updateCursor);
+    ta.addEventListener('selectionchange', updateCursor);
+}
+
+function copyCode() {
+    const code = document.getElementById('code-editor').value;
+    navigator.clipboard.writeText(code).then(() => showToast('Code copied to clipboard!'));
+}
+
+function toggleFullscreen() {
+    const el = document.querySelector('.main-area');
+    if (!document.fullscreenElement) {
+        el.requestFullscreen && el.requestFullscreen();
+    } else {
+        document.exitFullscreen && document.exitFullscreen();
+    }
+}
+
+// ═══════════════════════════════════════════════════════════════
+// BOTTOM PANEL TABS
+// ═══════════════════════════════════════════════════════════════
+function switchBottomTab(tab) {
+    activeTab = tab;
+    document.querySelectorAll('.panel-pane').forEach(p => p.classList.remove('active'));
+    document.querySelectorAll('.bottom-tab').forEach(b => b.classList.remove('active'));
+    document.getElementById('pane-' + tab).classList.add('active');
+    document.getElementById('tab-' + tab).classList.add('active');
+    if (tab === 'output') {
+        document.getElementById('output-dot').style.display = 'none';
+    }
+}
+
+function clearPanel() {
+    if (activeTab === 'input') {
+        document.getElementById('stdin-area').value = '';
+    } else {
+        clearOutputUI();
+    }
+}
+
+function clearOutputUI() {
+    document.getElementById('output-empty').style.display = 'flex';
+    document.getElementById('output-content').style.display = 'none';
+    document.getElementById('output-content').innerHTML = '';
+    document.getElementById('output-dot').style.display = 'none';
+    document.getElementById('sb-status').textContent = 'Ready';
+}
+
+// ═══════════════════════════════════════════════════════════════
+// JUDGE0 — Run Code
+// ═══════════════════════════════════════════════════════════════
+function toBase64(str) {
+    const bytes = new TextEncoder().encode(str);
+    let bin = ''; bytes.forEach(b => bin += String.fromCharCode(b));
+    return btoa(bin);
+}
+function fromBase64(b64) {
+    if (!b64) return '';
+    try {
+        const bin = atob(b64);
+        const bytes = new Uint8Array(bin.length);
+        for (let i = 0; i < bin.length; i++) bytes[i] = bin.charCodeAt(i);
+        return new TextDecoder().decode(bytes);
+    } catch(e) { return b64; }
+}
+
+async function runCode() {
+    const btn = document.getElementById('run-btn');
+    const code = document.getElementById('code-editor').value.trim();
+    const stdin = document.getElementById('stdin-area').value;
+
+    if (!code) { showToast('Write some code first!', true); return; }
+
+    btn.innerHTML = `<svg class="spinner-svg" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="M12 2v4M12 18v4M4.93 4.93l2.83 2.83M16.24 16.24l2.83 2.83M2 12h4M18 12h4M4.93 19.07l2.83-2.83M16.24 7.76l2.83-2.83"/></svg> Running...`;
+    btn.disabled = true;
+    btn.classList.add('loading');
+
+    // Switch to output and show running
+    switchBottomTab('output');
+    document.getElementById('sb-status').textContent = 'Running...';
+
+    document.getElementById('output-empty').style.display = 'none';
+    document.getElementById('output-content').style.display = 'block';
+    document.getElementById('output-content').innerHTML = `
+        <div class="output-status">
+            <span class="status-badge status-running">⏳ Compiling &amp; Running...</span>
+        </div>`;
+
+    try {
+        const body = {
+            language_id: parseInt(currentLang),
+            source_code: toBase64(code),
+            stdin: toBase64(stdin),
+            cpu_time_limit: 5,
+            memory_limit: 131072
+        };
+
+        const res = await fetch('https://ce.judge0.com/submissions?base64_encoded=true&wait=true', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify(body)
+        });
+
+        if (!res.ok) {
+            const txt = await res.text().catch(() => '');
+            throw new Error(`Judge0 ${res.status}: ${txt.slice(0, 200)}`);
+        }
+
+        const data = await res.json();
+        const stdout = fromBase64(data.stdout || '');
+        const stderr = fromBase64(data.stderr || data.compile_output || '');
+        const msg = fromBase64(data.message || '');
+        const statusId = data.status?.id;
+        const statusDesc = data.status?.description || 'Unknown';
+        const time = data.time ? `${(data.time * 1000).toFixed(0)} ms` : '—';
+        const memory = data.memory ? `${(data.memory / 1024).toFixed(1)} MB` : '—';
+
+        btn.innerHTML = `<svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor"><polygon points="5,3 19,12 5,21"/></svg> Run Code`;
+        btn.disabled = false;
+        btn.classList.remove('loading');
+
+        renderOutput({ statusId, statusDesc, stdout, stderr, msg, time, memory });
+
+        // Signal output tab
+        document.getElementById('output-dot').style.display = 'inline-block';
+
+    } catch(err) {
+        btn.innerHTML = `<svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor"><polygon points="5,3 19,12 5,21"/></svg> Run Code`;
+        btn.disabled = false;
+        btn.classList.remove('loading');
+
+        document.getElementById('output-content').innerHTML = `
+            <div class="output-status">
+                <span class="status-badge status-err">⚠️ Network Error</span>
+            </div>
+            <div class="output-block">
+                <div class="output-block-label">Error</div>
+                <div class="output-block-content err">${escHtml(err.message)}\n\nJudge0 API may be temporarily unavailable.\nCheck your internet connection and try again.</div>
+            </div>`;
+        document.getElementById('sb-status').textContent = 'Error';
+        document.getElementById('output-dot').style.display = 'inline-block';
+    }
+}
+
+function renderOutput({ statusId, statusDesc, stdout, stderr, msg, time, memory }) {
+    const isOk = statusId === 3; // Accepted
+    const isErr = [6,11,12,13].includes(statusId);
+    const isTLE = statusId === 5;
+    const isCE = statusId === 6;
+
+    let statusClass = isOk ? 'status-pass' : 'status-fail';
+    let statusText = isOk ? '✅ Accepted' : isTLE ? '⏰ Time Limit Exceeded' : isCE ? '🔴 Compilation Error' : isErr ? '❌ Runtime Error' : `⚠️ ${statusDesc}`;
+
+    if (isOk) document.getElementById('sb-status').textContent = `Done — ${time}`;
+    else document.getElementById('sb-status').textContent = statusDesc;
+
+    let html = `<div class="output-status">
+        <span class="status-badge ${statusClass}">${statusText}</span>
+        <div class="meta-info">
+            <div class="meta-chip">
+                <svg width="9" height="9" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12,6 12,12 16,14"/></svg>
+                ${time}
+            </div>
+            <div class="meta-chip">
+                <svg width="9" height="9" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="3" width="20" height="14" rx="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg>
+                ${memory}
+            </div>
+        </div>
+    </div>`;
+
+    if (stdout) {
+        html += `<div class="output-block">
+            <div class="output-block-label">stdout</div>
+            <div class="output-block-content">${escHtml(stdout)}</div>
+        </div>`;
+    } else if (isOk) {
+        html += `<div class="output-block">
+            <div class="output-block-label">stdout</div>
+            <div class="output-block-content" style="color:var(--text-muted);font-style:italic;">(empty output)</div>
+        </div>`;
+    }
+
+    if (stderr) {
+        html += `<div class="output-block">
+            <div class="output-block-label">${isCE ? 'Compilation Error' : 'stderr'}</div>
+            <div class="output-block-content err">${escHtml(stderr)}</div>
+        </div>`;
+    }
+
+    if (msg && msg !== stderr) {
+        html += `<div class="output-block">
+            <div class="output-block-label">Message</div>
+            <div class="output-block-content err">${escHtml(msg)}</div>
+        </div>`;
+    }
+
+    document.getElementById('output-content').innerHTML = html;
+    document.getElementById('output-scroll').scrollTop = 0;
+}
+
+function escHtml(s) {
+    return s.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');
+}
+
+// ═══════════════════════════════════════════════════════════════
+// VERTICAL RESIZE (bottom panel drag)
+// ═══════════════════════════════════════════════════════════════
+function setupVerticalResize() {
+    const handle = document.getElementById('v-resizer');
+    const bottomPanel = document.getElementById('bottom-panel');
+    const editorArea = document.getElementById('editor-area');
+    const mainArea = document.getElementById('main-area');
+
+    let dragging = false;
+    let startY = 0;
+    let startH = 0;
+
+    handle.addEventListener('mousedown', e => {
+        dragging = true;
+        startY = e.clientY;
+        startH = bottomPanel.offsetHeight;
+        handle.classList.add('dragging');
+        document.body.classList.add('row-resizing');
+        e.preventDefault();
+    });
+
+    document.addEventListener('mousemove', e => {
+        if (!dragging) return;
+        const delta = startY - e.clientY; // dragging up = increase bottom panel
+        const mainH = mainArea.offsetHeight;
+        const handleH = handle.offsetHeight;
+        const statusH = 22;
+        const toolbarH = 42;
+        const navH = 48;
+
+        const newBottomH = Math.min(
+            Math.max(startH + delta, 80),
+            mainH - 120 - handleH
+        );
+
+        bottomPanel.style.height = newBottomH + 'px';
+        bottomPanel.style.flex = 'none';
+    });
+
+    document.addEventListener('mouseup', () => {
+        if (dragging) {
+            dragging = false;
+            handle.classList.remove('dragging');
+            document.body.classList.remove('row-resizing');
+        }
+    });
+
+    // Touch support
+    handle.addEventListener('touchstart', e => {
+        dragging = true;
+        startY = e.touches[0].clientY;
+        startH = bottomPanel.offsetHeight;
+        handle.classList.add('dragging');
+        e.preventDefault();
+    }, { passive: false });
+
+    document.addEventListener('touchmove', e => {
+        if (!dragging) return;
+        const delta = startY - e.touches[0].clientY;
+        const mainH = mainArea.offsetHeight;
+        const handleH = handle.offsetHeight;
+        const newBottomH = Math.min(Math.max(startH + delta, 80), mainH - 120 - handleH);
+        bottomPanel.style.height = newBottomH + 'px';
+        bottomPanel.style.flex = 'none';
+        e.preventDefault();
+    }, { passive: false });
+
+    document.addEventListener('touchend', () => {
+        dragging = false;
+        handle.classList.remove('dragging');
+        document.body.classList.remove('row-resizing');
+    });
+}
+
+// ═══════════════════════════════════════════════════════════════
+// TOAST
+// ═══════════════════════════════════════════════════════════════
+function showToast(msg, isErr = false) {
+    const t = document.getElementById('toast');
+    t.textContent = msg;
+    t.className = 'toast show' + (isErr ? ' err' : '');
+    clearTimeout(t._t);
+    t._t = setTimeout(() => t.classList.remove('show'), 3000);
+}
+
+// ═══════════════════════════════════════════════════════════════
+// KEYBOARD SHORTCUTS LEGEND (shown in statusbar tooltip)
+// ═══════════════════════════════════════════════════════════════
+document.addEventListener('keydown', e => {
+    // Ctrl/Cmd + Enter = Run
+    if ((e.ctrlKey || e.metaKey) && e.key === 'Enter') {
+        e.preventDefault();
+        runCode();
+    }
+    // Escape = close reset modal
+    if (e.key === 'Escape') {
+        closeResetModal();
+    }
+});
+
+// Close modal when clicking outside the box
+document.getElementById('reset-modal').addEventListener('click', function(e) {
+    if (e.target === this) closeResetModal();
+});
+
+// ── START ──
+window.addEventListener('load', init);
+</script>
+</body>
+</html>

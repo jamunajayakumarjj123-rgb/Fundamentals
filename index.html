@@ -1,0 +1,3798 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fundamentals – Integrated AI Learning Platform for on-campus placements</title>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Geist:wght@300;400;500;600;700;800;900&family=Geist+Mono:wght@400;500&display=swap"
+        rel="stylesheet">
+    <style>
+        *,
+        *::before,
+        *::after {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        :root {
+            --bg: #0a0a0a;
+            --bg2: #111111;
+            --bg3: #161616;
+            --card: #141414;
+            --border: rgba(255, 255, 255, 0.08);
+            --border2: rgba(255, 255, 255, 0.12);
+            --orange: #f97316;
+            --orange2: #ea6c0a;
+            --white: #ffffff;
+            --gray1: #a1a1aa;
+            --gray2: #71717a;
+            --gray3: #3f3f46;
+            --text: #e4e4e7;
+        }
+
+        html {
+            scroll-behavior: smooth
+        }
+
+        body {
+            background: var(--bg);
+            color: var(--white);
+            font-family: 'Geist', sans-serif;
+            overflow-x: hidden;
+            line-height: 1.6
+        }
+
+        /* ── NAVBAR ── */
+        nav {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 100;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0 40px;
+            height: 64px;
+            background: rgba(10, 10, 10, .88);
+            backdrop-filter: blur(16px);
+            border-bottom: 1px solid var(--border)
+        }
+
+        .nav-logo {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            text-decoration: none;
+            color: var(--white);
+            font-weight: 700;
+            font-size: 17px;
+            letter-spacing: -.3px
+        }
+
+        .logo-icon {
+            width: 32px;
+            height: 32px;
+            background: var(--orange);
+            border-radius: 7px;
+            display: flex;
+            align-items: center;
+            justify-content: center
+        }
+
+        .logo-icon svg {
+            width: 18px;
+            height: 18px;
+            fill: white
+        }
+
+        .nav-links {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            list-style: none
+        }
+
+        .nav-links a {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            text-decoration: none;
+            color: var(--gray1);
+            font-size: 14px;
+            font-weight: 500;
+            padding: 8px 14px;
+            border-radius: 8px;
+            transition: color .2s, background .2s
+        }
+
+        .nav-links a:hover {
+            color: var(--white);
+            background: rgba(255, 255, 255, .06)
+        }
+
+        .nav-links a svg {
+            width: 15px;
+            height: 15px;
+            opacity: .7
+        }
+
+        .nav-right {
+            display: flex;
+            align-items: center;
+            gap: 12px
+        }
+
+        .theme-btn {
+            width: 36px;
+            height: 36px;
+            border-radius: 50%;
+            border: 1px solid var(--border2);
+            background: transparent;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--gray1);
+            transition: all .2s
+        }
+
+        .theme-btn:hover {
+            border-color: var(--orange);
+            color: var(--white)
+        }
+
+        .cta-btn {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            background: var(--orange);
+            color: white;
+            font-family: 'Geist', sans-serif;
+            font-weight: 600;
+            font-size: 14px;
+            padding: 9px 20px;
+            border-radius: 999px;
+            border: none;
+            cursor: pointer;
+            text-decoration: none;
+            transition: background .2s, transform .15s
+        }
+
+        .cta-btn:hover {
+            background: var(--orange2);
+            transform: translateY(-1px)
+        }
+
+        /* ── HERO ── */
+        .hero {
+            position: relative;
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            padding: 80px 40px 60px;
+            overflow: hidden
+        }
+
+        .hero-bg {
+            position: absolute;
+            inset: 0;
+            z-index: 0;
+            background: radial-gradient(ellipse 80% 60% at 70% 50%, rgba(249, 115, 22, .06) 0%, transparent 70%), radial-gradient(ellipse 60% 80% at 20% 80%, rgba(249, 115, 22, .04) 0%, transparent 60%)
+        }
+
+        .hero-bg::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background-image: linear-gradient(rgba(255, 255, 255, .025) 1px, transparent 1px), linear-gradient(90deg, rgba(255, 255, 255, .025) 1px, transparent 1px);
+            background-size: 60px 60px;
+            mask-image: radial-gradient(ellipse 80% 80% at 50% 50%, black 30%, transparent 80%)
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 1;
+            max-width: 620px;
+            flex-shrink: 0
+        }
+
+        .hero-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            background: rgba(255, 255, 255, .06);
+            border: 1px solid var(--border2);
+            border-radius: 999px;
+            padding: 6px 14px;
+            font-size: 13px;
+            font-weight: 500;
+            color: var(--gray1);
+            margin-bottom: 28px
+        }
+
+        .hero-badge span {
+            color: var(--white);
+            font-weight: 600
+        }
+
+        .hero-title {
+            font-size: clamp(42px, 5.5vw, 68px);
+            font-weight: 800;
+            line-height: 1.08;
+            letter-spacing: -2.5px;
+            margin-bottom: 20px;
+            color: var(--white)
+        }
+
+        .hero-sub {
+            font-size: 16px;
+            color: var(--gray1);
+            line-height: 1.65;
+            max-width: 480px;
+            margin-bottom: 36px
+        }
+
+        .hero-actions {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            flex-wrap: wrap
+        }
+
+        .btn-outline {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            background: white;
+            color: #0a0a0a;
+            font-family: 'Geist', sans-serif;
+            font-weight: 600;
+            font-size: 15px;
+            padding: 13px 26px;
+            border-radius: 999px;
+            border: none;
+            cursor: pointer;
+            text-decoration: none;
+            transition: background .2s, transform .15s
+        }
+
+        .btn-outline:hover {
+            background: #e4e4e4;
+            transform: translateY(-1px)
+        }
+
+        .btn-primary {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            background: var(--orange);
+            color: white;
+            font-family: 'Geist', sans-serif;
+            font-weight: 600;
+            font-size: 15px;
+            padding: 13px 26px;
+            border-radius: 999px;
+            border: none;
+            cursor: pointer;
+            text-decoration: none;
+            transition: background .2s, transform .15s;
+            box-shadow: 0 0 30px rgba(249, 115, 22, .35)
+        }
+
+        .btn-primary:hover {
+            background: var(--orange2);
+            transform: translateY(-1px)
+        }
+
+        /* ── HERO VISUAL ── */
+        .hero-visual {
+            position: absolute;
+            right: 0;
+            top: 0;
+            bottom: 0;
+            width: 52%;
+            overflow: hidden;
+            pointer-events: none;
+            z-index: 1;
+            mask-image: linear-gradient(to bottom, transparent 0%, black 12%, black 88%, transparent 100%);
+            -webkit-mask-image: linear-gradient(to bottom, transparent 0%, black 12%, black 88%, transparent 100%)
+        }
+
+        .hero-visual-inner {
+            position: absolute;
+            inset: 0;
+            display: flex;
+            gap: 16px;
+            padding: 0 20px 0 40px;
+            transform: perspective(900px) rotateX(4deg) rotateY(-6deg);
+            transform-origin: center center
+        }
+
+        .scroll-col {
+            display: flex;
+            flex-direction: column;
+            gap: 14px;
+            flex: 1;
+            min-width: 0
+        }
+
+        .scroll-col-inner {
+            display: flex;
+            flex-direction: column;
+            gap: 14px;
+            animation: scrollUp 28s linear infinite
+        }
+
+        .scroll-col:nth-child(2) .scroll-col-inner {
+            animation-duration: 22s;
+            animation-delay: -8s
+        }
+
+        .scroll-col:nth-child(3) .scroll-col-inner {
+            animation-duration: 28s;
+            animation-delay: -5s
+        }
+
+        @keyframes scrollUp {
+            0% {
+                transform: translateY(0)
+            }
+
+            100% {
+                transform: translateY(-50%)
+            }
+        }
+
+        .panel-card {
+            background: rgba(18, 18, 18, .95);
+            border: 1px solid rgba(255, 255, 255, .1);
+            border-radius: 12px;
+            padding: 14px 16px;
+            backdrop-filter: blur(16px);
+            box-shadow: 0 8px 32px rgba(0, 0, 0, .5), inset 0 1px 0 rgba(255, 255, 255, .06);
+            flex-shrink: 0
+        }
+
+        .pill-card {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            background: rgba(18, 18, 18, .95);
+            border: 1px solid rgba(255, 255, 255, .1);
+            border-radius: 999px;
+            padding: 8px 16px 8px 8px;
+            backdrop-filter: blur(16px);
+            box-shadow: 0 4px 20px rgba(0, 0, 0, .5);
+            flex-shrink: 0;
+            white-space: nowrap
+        }
+
+        /* ── SECTIONS ── */
+        .section {
+            padding: 100px 40px;
+            position: relative
+        }
+
+        .section-center {
+            max-width: 1200px;
+            margin: 0 auto
+        }
+
+        .ey-section {
+            background: var(--bg)
+        }
+
+        .ey-title {
+            font-size: clamp(36px, 5vw, 60px);
+            font-weight: 800;
+            letter-spacing: -2px;
+            line-height: 1.1;
+            margin-bottom: 20px
+        }
+
+        .ey-title span.dim {
+            color: var(--gray2);
+            font-weight: 400
+        }
+
+        .ey-desc {
+            font-size: 16px;
+            color: var(--gray1);
+            max-width: 460px;
+            line-height: 1.65
+        }
+
+        .ey-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            border: 1px solid var(--border);
+            border-radius: 16px;
+            overflow: hidden
+        }
+
+        .ey-item {
+            padding: 44px 44px 0;
+            background: var(--bg);
+            border-right: 1px solid var(--border);
+            border-bottom: 1px solid var(--border);
+            overflow: hidden;
+            min-height: 520px
+        }
+
+        .ey-item:nth-child(even) {
+            border-right: none
+        }
+
+        .ey-item:nth-child(n+3) {
+            border-bottom: none
+        }
+
+        .ey-item-label {
+            font-size: 11px;
+            font-weight: 700;
+            letter-spacing: 1.5px;
+            text-transform: uppercase;
+            color: var(--orange);
+            margin-bottom: 14px
+        }
+
+        .ey-item-title {
+            font-size: 22px;
+            font-weight: 700;
+            letter-spacing: -.5px;
+            margin-bottom: 14px;
+            color: var(--white)
+        }
+
+        .ey-item-desc {
+            font-size: 14px;
+            color: var(--gray1);
+            line-height: 1.7;
+            margin-bottom: 28px
+        }
+
+        /* ── BADGE ── */
+        .badge {
+            padding: 2px 7px;
+            border-radius: 4px;
+            font-size: 10px;
+            font-weight: 700;
+            display: inline-flex;
+            align-items: center
+        }
+
+        .badge.med {
+            background: rgba(251, 191, 36, .12);
+            color: #fbbf24
+        }
+
+        .badge.easy {
+            background: rgba(34, 197, 94, .12);
+            color: #22c55e
+        }
+
+        .badge.hard {
+            background: rgba(239, 68, 68, .12);
+            color: #ef4444
+        }
+
+        .badge.tag {
+            background: rgba(255, 255, 255, .06);
+            color: var(--gray2)
+        }
+
+        /* ════════════════════════════════════════
+   PREVIEW 1 — COMPANY SPECIFIC
+   Mock browser panel with tab-swap animation
+════════════════════════════════════════ */
+        .cp-panel {
+            position: relative;
+            margin-top: 8px;
+            background: #161616;
+            border-radius: 12px 12px 0 0;
+            border: 1px solid rgba(255, 255, 255, .1);
+            border-bottom: none;
+            overflow: hidden;
+            box-shadow: 0 -4px 30px rgba(0, 0, 0, .4);
+        }
+
+        .cp-panel::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            height: 80px;
+            background: linear-gradient(to bottom, transparent, var(--bg));
+            pointer-events: none;
+            z-index: 10;
+        }
+
+        .cp-tabs-bar {
+            display: flex;
+            align-items: center;
+            gap: 0;
+            border-bottom: 1px solid rgba(255, 255, 255, .08);
+            padding: 0 16px;
+            background: #111;
+            overflow: hidden;
+        }
+
+        .cp-tab {
+            padding: 11px 13px;
+            font-size: 12px;
+            font-weight: 500;
+            color: var(--gray2);
+            white-space: nowrap;
+            border-bottom: 2px solid transparent;
+            margin-bottom: -1px;
+            cursor: pointer;
+            transition: color .3s, border-color .3s;
+            flex-shrink: 0;
+        }
+
+        .cp-tab.active {
+            color: var(--white);
+            border-color: var(--orange)
+        }
+
+        /* The list panel — we swap content via JS */
+        .cp-list-wrap {
+            position: relative;
+            overflow: hidden;
+            min-height: 220px
+        }
+
+        .cp-list {
+            display: flex;
+            flex-direction: column;
+            transition: opacity .35s ease, transform .35s ease;
+        }
+
+        .cp-list.exiting {
+            opacity: 0;
+            transform: translateY(-10px);
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0
+        }
+
+        .cp-list.entering {
+            animation: cpEnter .35s ease forwards
+        }
+
+        @keyframes cpEnter {
+            from {
+                opacity: 0;
+                transform: translateY(12px)
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0)
+            }
+        }
+
+        .cp-row {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            padding: 10px 16px;
+            border-bottom: 1px solid rgba(255, 255, 255, .05);
+            font-size: 12px;
+            transition: background .3s;
+        }
+
+        .cp-row:last-child {
+            border-bottom: none
+        }
+
+        .cp-row.hl {
+            background: rgba(249, 115, 22, .06)
+        }
+
+        .cp-idx {
+            color: var(--gray3);
+            font-size: 11px;
+            min-width: 16px;
+            flex-shrink: 0
+        }
+
+        .cp-name {
+            flex: 1;
+            color: var(--gray1);
+            font-weight: 500;
+            transition: color .3s
+        }
+
+        .cp-row.hl .cp-name {
+            color: var(--text)
+        }
+
+        .cp-meta {
+            display: flex;
+            align-items: center;
+            gap: 5px;
+            flex-shrink: 0
+        }
+
+        .cp-time {
+            font-size: 11px;
+            color: var(--gray2);
+            display: flex;
+            align-items: center;
+            gap: 3px
+        }
+
+        /* ════════════════════════════════════════
+   PREVIEW 2 — ROADMAP NODES
+   Crosshatch grid background + glowing nodes
+════════════════════════════════════════ */
+        .roadmap-container {
+            position: relative;
+            margin-top: 8px;
+            padding: 24px 20px 0;
+            overflow: hidden;
+            min-height: 240px;
+        }
+
+        .roadmap-container::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            height: 80px;
+            background: linear-gradient(to bottom, transparent, var(--bg));
+            pointer-events: none;
+            z-index: 10;
+        }
+
+        /* 4×3 grid of nodes */
+        .rmap-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            grid-template-rows: repeat(3, 80px);
+            gap: 8px;
+        }
+
+        .rmap-node {
+            position: relative;
+            border-radius: 10px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            gap: 5px;
+            padding: 8px 4px;
+            text-align: center;
+            /* crosshatch background for inactive */
+            background-image: repeating-linear-gradient(45deg,
+                    rgba(255, 255, 255, .04) 0px, rgba(255, 255, 255, .04) 1px,
+                    transparent 1px, transparent 8px);
+            border: 1.5px dashed rgba(255, 255, 255, .12);
+            transition: border-color .5s, background .5s, box-shadow .5s, transform .4s;
+        }
+
+        .rmap-node.done {
+            border-color: rgba(249, 115, 22, .5);
+            background-image: repeating-linear-gradient(45deg,
+                    rgba(249, 115, 22, .06) 0px, rgba(249, 115, 22, .06) 1px,
+                    transparent 1px, transparent 8px);
+            box-shadow: 0 0 12px rgba(249, 115, 22, .1);
+        }
+
+        .rmap-node.active {
+            border: 2px solid var(--orange);
+            background: rgba(249, 115, 22, .12);
+            background-image: none;
+            box-shadow: 0 0 24px rgba(249, 115, 22, .3), inset 0 0 12px rgba(249, 115, 22, .08);
+            transform: scale(1.06);
+            z-index: 2;
+        }
+
+        /* Dashed orange connector lines between first-row active nodes */
+        .rmap-connector {
+            position: absolute;
+            top: 50%;
+            height: 2px;
+            background: repeating-linear-gradient(90deg, var(--orange) 0, var(--orange) 6px, transparent 6px, transparent 12px);
+            transform: translateY(-50%);
+            transition: opacity .5s;
+            z-index: 3;
+            pointer-events: none;
+        }
+
+        .rmap-icon {
+            font-size: 0;
+            line-height: 0
+        }
+
+        .rmap-icon svg {
+            width: 28px;
+            height: 28px;
+            transition: filter .5s
+        }
+
+        .rmap-node.active .rmap-icon svg {
+            filter: drop-shadow(0 0 6px rgba(249, 115, 22, .8))
+        }
+
+        .rmap-label {
+            font-size: 10px;
+            font-weight: 700;
+            line-height: 1.3;
+            color: var(--gray2);
+            transition: color .4s
+        }
+
+        .rmap-node.done .rmap-label {
+            color: rgba(249, 115, 22, .8)
+        }
+
+        .rmap-node.active .rmap-label {
+            color: var(--orange)
+        }
+
+        /* empty placeholder node */
+        .rmap-node.empty {
+            opacity: .18;
+            pointer-events: none
+        }
+
+        /* ════════════════════════════════════════
+   PREVIEW 3 — MASTER DSA
+   Stacked cards, highlighted card floats up
+════════════════════════════════════════ */
+        .dsa-panel {
+            position: relative;
+            margin-top: 8px;
+            padding: 16px 16px 0;
+            overflow: hidden;
+        }
+
+        .dsa-panel::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            height: 80px;
+            background: linear-gradient(to bottom, transparent, var(--bg));
+            pointer-events: none;
+            z-index: 10;
+        }
+
+        .dsa-card {
+            background: rgba(255, 255, 255, .025);
+            border: 1px solid rgba(255, 255, 255, .07);
+            border-radius: 10px;
+            padding: 12px 14px;
+            margin-bottom: 8px;
+            transition: border-color .4s, background .4s, transform .4s, box-shadow .4s, opacity .4s;
+            position: relative;
+            z-index: 1;
+        }
+
+        .dsa-card.hl {
+            border-color: var(--orange);
+            background: rgba(249, 115, 22, .07);
+            transform: translateY(-2px) scale(1.02);
+            box-shadow: 0 0 24px rgba(249, 115, 22, .18), 0 4px 16px rgba(0, 0, 0, .4);
+            z-index: 2;
+        }
+
+        .dsa-card-title {
+            font-size: 14px;
+            font-weight: 600;
+            color: var(--gray1);
+            margin-bottom: 6px;
+            transition: color .4s
+        }
+
+        .dsa-card.hl .dsa-card-title {
+            color: var(--white);
+            font-size: 15px
+        }
+
+        .dsa-meta {
+            display: flex;
+            align-items: center;
+            gap: 7px;
+            font-size: 11px;
+            color: var(--gray2)
+        }
+
+        /* ════════════════════════════════════════
+   PREVIEW 4 — ACE INTERVIEWS
+   Expanded round card with detail text + questions
+════════════════════════════════════════ */
+        .rounds-panel {
+            position: relative;
+            margin-top: 8px;
+            overflow: hidden;
+            background: #0f0f0f;
+            border-radius: 12px 12px 0 0;
+            border: 1px solid rgba(255, 255, 255, .08);
+            border-bottom: none;
+        }
+
+        .rounds-panel::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            height: 80px;
+            background: linear-gradient(to bottom, transparent, var(--bg));
+            pointer-events: none;
+            z-index: 10;
+        }
+
+        .round-row {
+            display: flex;
+            align-items: flex-start;
+            gap: 12px;
+            padding: 12px 14px;
+            border-bottom: 1px solid rgba(255, 255, 255, .05);
+            transition: background .4s;
+            overflow: hidden;
+        }
+
+        .round-row:last-child {
+            border-bottom: none
+        }
+
+        .rnum {
+            width: 28px;
+            height: 28px;
+            border-radius: 6px;
+            flex-shrink: 0;
+            margin-top: 1px;
+            background: rgba(255, 255, 255, .04);
+            border: 1px solid var(--border2);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 13px;
+            font-weight: 700;
+            color: var(--gray1);
+            transition: background .4s, border-color .4s, color .4s;
+        }
+
+        .round-row.hl .rnum {
+            background: rgba(249, 115, 22, .15);
+            border-color: var(--orange);
+            color: var(--orange)
+        }
+
+        .round-main {
+            flex: 1;
+            min-width: 0
+        }
+
+        .rname {
+            font-size: 13px;
+            font-weight: 600;
+            color: var(--gray1);
+            transition: color .4s;
+            margin-bottom: 3px
+        }
+
+        .round-row.hl .rname {
+            color: var(--white)
+        }
+
+        .rmeta {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            flex-shrink: 0;
+            margin-top: 2px
+        }
+
+        /* Expanded detail — shown only on highlighted row */
+        .round-detail {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height .5s ease, opacity .4s ease;
+            opacity: 0;
+        }
+
+        .round-row.hl .round-detail {
+            max-height: 200px;
+            opacity: 1
+        }
+
+        .round-detail-text {
+            font-size: 11px;
+            color: var(--gray2);
+            line-height: 1.65;
+            margin-top: 8px
+        }
+
+        .round-questions {
+            margin-top: 8px
+        }
+
+        .round-q-label {
+            font-size: 10px;
+            font-weight: 700;
+            letter-spacing: .8px;
+            text-transform: uppercase;
+            color: var(--gray3);
+            margin-bottom: 4px
+        }
+
+        .round-q-item {
+            font-size: 11px;
+            color: var(--gray2);
+            padding: 3px 0;
+            display: flex;
+            align-items: center;
+            gap: 5px
+        }
+
+        .round-q-item .solve {
+            color: var(--orange);
+            font-size: 10px;
+            font-weight: 600;
+            cursor: pointer
+        }
+
+        /* ── FEATURES ROW ── */
+        .features-row {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 24px;
+            margin-top: 70px
+        }
+
+        .feature-card {
+            background: var(--card);
+            border: 1px solid var(--border);
+            border-radius: 14px;
+            padding: 28px 28px 26px;
+            transition: border-color .2s
+        }
+
+        .feature-card:hover {
+            border-color: rgba(249, 115, 22, .3)
+        }
+
+        .feature-icon {
+            width: 44px;
+            height: 44px;
+            border-radius: 10px;
+            background: rgba(249, 115, 22, .1);
+            border: 1px solid rgba(249, 115, 22, .2);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 16px
+        }
+
+        .feature-icon svg {
+            width: 22px;
+            height: 22px;
+            color: var(--orange)
+        }
+
+        .feature-title {
+            font-size: 16px;
+            font-weight: 700;
+            margin-bottom: 10px;
+            letter-spacing: -.3px
+        }
+
+        .feature-desc {
+            font-size: 14px;
+            color: var(--gray1);
+            line-height: 1.65
+        }
+
+        /* ── TESTIMONIALS ── */
+        .testimonials-section {
+            background: var(--bg)
+        }
+
+        .testimonials-title {
+            font-size: clamp(32px, 4.5vw, 52px);
+            font-weight: 800;
+            letter-spacing: -1.5px;
+            line-height: 1.1
+        }
+
+        .testimonials-title span {
+            color: var(--gray2);
+            font-weight: 400
+        }
+
+        .learner-count {
+            color: var(--orange);
+            font-size: 18px;
+            font-weight: 700;
+            margin-top: 8px
+        }
+
+        .testimonials-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 16px
+        }
+
+        .testimonial-card {
+            background: var(--card);
+            border: 1px solid var(--border);
+            border-radius: 14px;
+            padding: 24px;
+            transition: border-color .2s, transform .2s
+        }
+
+        .testimonial-card:hover {
+            border-color: var(--border2);
+            transform: translateY(-2px)
+        }
+
+        .t-header {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin-bottom: 14px
+        }
+
+        .t-avatar {
+            width: 38px;
+            height: 38px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 700;
+            font-size: 14px;
+            flex-shrink: 0
+        }
+
+        .t-name {
+            font-weight: 600;
+            font-size: 14px
+        }
+
+        .li-icon {
+            width: 18px;
+            height: 18px;
+            background: #0a66c2;
+            border-radius: 4px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-left: auto;
+            flex-shrink: 0
+        }
+
+        .li-icon svg {
+            width: 11px;
+            height: 11px;
+            fill: white
+        }
+
+        .t-text {
+            font-size: 13.5px;
+            color: var(--gray1);
+            line-height: 1.7
+        }
+
+        .t-footer {
+            margin-top: 16px;
+            padding-top: 14px;
+            border-top: 1px solid var(--border);
+            display: flex;
+            align-items: center;
+            gap: 10px
+        }
+
+        .t-company-logo {
+            width: 28px;
+            height: 28px;
+            border-radius: 6px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 11px;
+            font-weight: 700;
+            color: white
+        }
+
+        .t-role {
+            font-size: 13px;
+            font-weight: 600;
+            color: var(--text)
+        }
+
+        .t-company {
+            font-size: 12px;
+            color: var(--gray2)
+        }
+
+        /* ── FOOTER ── */
+        footer {
+            background: var(--bg);
+            border-top: 1px solid var(--border);
+            padding: 60px 40px 40px;
+            text-align: center
+        }
+
+        .footer-logo {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            margin-bottom: 16px
+        }
+
+        .footer-desc {
+            font-size: 14px;
+            color: var(--gray2);
+            max-width: 400px;
+            margin: 0 auto 30px;
+            line-height: 1.65
+        }
+
+        .footer-links {
+            display: flex;
+            justify-content: center;
+            gap: 24px;
+            margin-bottom: 40px;
+            flex-wrap: wrap
+        }
+
+        .footer-links a {
+            font-size: 13px;
+            color: var(--gray2);
+            text-decoration: none;
+            transition: color .2s
+        }
+
+        .footer-links a:hover {
+            color: var(--white)
+        }
+
+        .footer-bottom {
+            font-size: 13px;
+            color: var(--gray3)
+        }
+
+        /* ── LIGHT MODE — full page coverage ── */
+        body.light {
+            --bg: #f8f8f8;
+            --bg2: #f0f0f0;
+            --bg3: #e8e8e8;
+            --card: #ffffff;
+            --border: rgba(0, 0, 0, 0.08);
+            --border2: rgba(0, 0, 0, 0.14);
+            --white: #0a0a0a;
+            --gray1: #52525b;
+            --gray2: #71717a;
+            --gray3: #a1a1aa;
+            --text: #18181b;
+        }
+
+        body.light nav {
+            background: rgba(248, 248, 248, .95);
+            border-bottom-color: rgba(0, 0, 0, .08);
+        }
+
+        body.light .hero-bg {
+            background: radial-gradient(ellipse 80% 60% at 70% 50%, rgba(249, 115, 22, .08) 0%, transparent 70%);
+        }
+
+        body.light .ey-item {
+            background: var(--bg);
+        }
+
+        body.light .cp-panel {
+            background: #f4f4f4;
+            border-color: rgba(0, 0, 0, .1);
+        }
+
+        body.light .cp-tabs-bar {
+            background: #ebebeb;
+        }
+
+        body.light .cp-tab {
+            color: #71717a;
+        }
+
+        body.light .cp-tab.active {
+            color: #0a0a0a;
+            border-color: var(--orange);
+        }
+
+        body.light .rmap-node {
+            background-color: #e8e8e8;
+            border-color: rgba(0, 0, 0, .18);
+            background-image: repeating-linear-gradient(-45deg, rgba(0, 0, 0, .06) 0px, rgba(0, 0, 0, .06) 1px, transparent 1px, transparent 8px);
+        }
+
+        body.light .rmap-node.done {
+            background-color: #fff3e0;
+        }
+
+        body.light .rmap-node.active {
+            background-color: #fff0e0;
+        }
+
+        body.light .dsa-card {
+            background: rgba(0, 0, 0, .04);
+            border-color: rgba(0, 0, 0, .08);
+        }
+
+        body.light .rounds-panel {
+            background: #f4f4f4;
+            border-color: rgba(0, 0, 0, .1);
+        }
+
+        body.light .panel-card {
+            background: rgba(255, 255, 255, .9);
+            border-color: rgba(0, 0, 0, .1);
+        }
+
+        body.light .pill-card {
+            background: rgba(255, 255, 255, .9);
+            border-color: rgba(0, 0, 0, .1);
+        }
+
+        body.light .feature-card {
+            background: #fff;
+        }
+
+        body.light .roadmap-container::after,
+        body.light .dsa-panel::after,
+        body.light .rounds-panel::after,
+        body.light .cp-panel::after {
+            background: linear-gradient(to bottom, transparent, var(--bg));
+        }
+
+        body.light .marquee-fade-left {
+            background: linear-gradient(to right, #f8f8f8, transparent);
+        }
+
+        body.light .marquee-fade-right {
+            background: linear-gradient(to left, #f8f8f8, transparent);
+        }
+
+        body.light .pricing-card {
+            background: #fff;
+        }
+
+        body.light .contact-banner {
+            background: #fff;
+        }
+
+        body.light .faq-panel {
+            background: #fff;
+        }
+
+        body.light .faq-cat:hover,
+        .body.light .faq-cat.active {
+            background: #f0f0f0;
+        }
+
+        body.light footer {
+            background: #f0f0f0;
+            border-top-color: rgba(0, 0, 0, .1);
+        }
+
+        body.light .ey-grid {
+            border-color: rgba(0, 0, 0, .08);
+        }
+
+        body.light .ey-item {
+            border-color: rgba(0, 0, 0, .08);
+        }
+
+        /* ── MARQUEE TESTIMONIALS ── */
+        .marquee-wrap {
+            position: relative;
+            overflow: hidden;
+            width: 100%;
+        }
+
+        .marquee-track {
+            display: flex;
+            gap: 20px;
+            width: max-content;
+            padding: 8px 0;
+        }
+
+        .marquee-ltr {
+            animation: marquee-ltr 32s linear infinite;
+        }
+
+        .marquee-rtl {
+            animation: marquee-rtl 36s linear infinite;
+        }
+
+        .marquee-wrap:hover .marquee-ltr,
+        .marquee-wrap:hover .marquee-rtl {
+            animation-play-state: paused;
+        }
+
+        @keyframes marquee-ltr {
+            0% {
+                transform: translateX(0);
+            }
+
+            100% {
+                transform: translateX(-50%);
+            }
+        }
+
+        @keyframes marquee-rtl {
+            0% {
+                transform: translateX(-50%);
+            }
+
+            100% {
+                transform: translateX(0);
+            }
+        }
+
+        /* Glassmorphism fade at edges */
+        .marquee-fade-left,
+        .marquee-fade-right {
+            position: absolute;
+            top: 0;
+            bottom: 0;
+            width: 140px;
+            pointer-events: none;
+            z-index: 2;
+        }
+
+        .marquee-fade-left {
+            left: 0;
+            background: linear-gradient(to right, var(--bg) 0%, transparent 100%);
+        }
+
+        .marquee-fade-right {
+            right: 0;
+            background: linear-gradient(to left, var(--bg) 0%, transparent 100%);
+        }
+
+        .testimonial-card {
+            background: var(--card);
+            border: 1px solid var(--border);
+            border-radius: 14px;
+            padding: 22px 22px 18px;
+            width: 320px;
+            flex-shrink: 0;
+            transition: border-color .2s;
+        }
+
+        .testimonial-card:hover {
+            border-color: var(--border2);
+        }
+
+        .t-header {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin-bottom: 14px
+        }
+
+        .t-avatar {
+            width: 38px;
+            height: 38px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 700;
+            font-size: 14px;
+            flex-shrink: 0;
+            color: white
+        }
+
+        .t-name {
+            font-weight: 600;
+            font-size: 14px
+        }
+
+        .li-icon {
+            width: 18px;
+            height: 18px;
+            background: #0a66c2;
+            border-radius: 4px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-left: auto;
+            flex-shrink: 0
+        }
+
+        .li-icon svg {
+            width: 11px;
+            height: 11px;
+            fill: white
+        }
+
+        .t-text {
+            font-size: 13px;
+            color: var(--gray1);
+            line-height: 1.7;
+            margin-bottom: 14px
+        }
+
+        .t-footer {
+            padding-top: 14px;
+            border-top: 1px solid var(--border);
+            display: flex;
+            align-items: center;
+            gap: 10px
+        }
+
+        .t-company-logo {
+            width: 28px;
+            height: 28px;
+            border-radius: 6px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 11px;
+            font-weight: 700;
+            color: white
+        }
+
+        .t-role {
+            font-size: 13px;
+            font-weight: 600;
+            color: var(--text)
+        }
+
+        .t-company {
+            font-size: 12px;
+            color: var(--gray2)
+        }
+
+        /* ── PRICING ── */
+        .pricing-card {
+            background: var(--card);
+            border: 1px solid var(--border);
+            border-radius: 18px;
+            padding: 32px;
+            position: relative;
+            overflow: hidden;
+            transition: border-color .2s, box-shadow .2s;
+        }
+
+        .pricing-card:hover {
+            border-color: var(--border2);
+            box-shadow: 0 8px 40px rgba(0, 0, 0, .2);
+        }
+
+        .pricing-popular {
+            border-color: var(--orange);
+            box-shadow: 0 0 40px rgba(249, 115, 22, .12);
+        }
+
+        .popular-bar {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            background: var(--orange);
+            color: white;
+            font-size: 13px;
+            font-weight: 700;
+            padding: 10px;
+            text-align: center;
+            border-radius: 18px 18px 0 0;
+        }
+
+        .pricing-popular>*:not(.popular-bar) {
+            margin-top: 0;
+        }
+
+        .pricing-popular>.popular-bar+* {
+            margin-top: 48px;
+        }
+
+        .price-tabs {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+        }
+
+        .price-tab {
+            padding: 8px 16px;
+            border-radius: 999px;
+            font-size: 13px;
+            font-weight: 600;
+            border: 1px solid var(--border2);
+            background: transparent;
+            color: var(--gray1);
+            cursor: pointer;
+            transition: all .2s;
+            font-family: 'Geist', sans-serif;
+            position: relative;
+        }
+
+        .price-tab.active {
+            background: transparent;
+            border-color: var(--orange);
+            color: var(--orange);
+        }
+
+        .price-tab:hover {
+            border-color: var(--gray2);
+            color: var(--white);
+        }
+
+        .plan-features {
+            list-style: none;
+            margin-bottom: 24px;
+        }
+
+        .plan-features li {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 13.5px;
+            color: var(--gray1);
+            padding: 7px 0;
+            border-bottom: 1px solid var(--border);
+        }
+
+        .plan-features li:last-child {
+            border-bottom: none;
+        }
+
+        .plan-features-sm li {
+            font-size: 12.5px;
+            padding: 5px 0;
+        }
+
+        .check {
+            color: #22c55e;
+            font-weight: 700;
+            flex-shrink: 0;
+        }
+
+        .cross {
+            color: var(--gray3);
+            font-weight: 700;
+            flex-shrink: 0;
+        }
+
+        .pricing-cta {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 6px;
+            width: 100%;
+            padding: 13px;
+            border-radius: 12px;
+            background: rgba(249, 115, 22, .1);
+            border: 1px solid rgba(249, 115, 22, .4);
+            color: var(--orange);
+            font-weight: 700;
+            font-size: 14px;
+            text-decoration: none;
+            cursor: pointer;
+            transition: background .2s, transform .15s;
+            font-family: 'Geist', sans-serif;
+        }
+
+        .pricing-cta:hover {
+            background: rgba(249, 115, 22, .2);
+            transform: translateY(-1px);
+        }
+
+        .pricing-mini {
+            padding: 24px;
+        }
+
+        .price-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 20px;
+            margin-bottom: 60px;
+        }
+
+        /* ── CONTACT BANNER ── */
+        .contact-banner {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 32px;
+            flex-wrap: wrap;
+            background: var(--card);
+            border: 1px solid var(--border);
+            border-radius: 18px;
+            padding: 36px 40px;
+        }
+
+        .contact-btn {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            padding: 14px 24px;
+            border-radius: 12px;
+            background: var(--bg3);
+            border: 1px solid var(--border2);
+            color: var(--white);
+            font-size: 14px;
+            font-weight: 600;
+            cursor: pointer;
+            font-family: 'Geist', sans-serif;
+            transition: background .2s, border-color .2s;
+            min-width: 220px;
+        }
+
+        .contact-btn:hover {
+            background: var(--bg2);
+            border-color: var(--gray2);
+        }
+
+        .contact-btn-wa {
+            background: rgba(37, 211, 102, .1);
+            border-color: rgba(37, 211, 102, .4);
+            color: #25d366;
+        }
+
+        .contact-btn-wa svg {
+            fill: #25d366;
+        }
+
+        .contact-btn-wa:hover {
+            background: rgba(37, 211, 102, .18);
+        }
+
+        /* ── FAQ ── */
+        .faq-layout {
+            display: grid;
+            grid-template-columns: 260px 1fr;
+            gap: 40px;
+            align-items: start;
+        }
+
+        .faq-cats {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+            position: sticky;
+            top: 80px;
+        }
+
+        .faq-cat {
+            padding: 12px 18px;
+            border-radius: 12px;
+            background: transparent;
+            border: 1px solid transparent;
+            color: var(--gray1);
+            font-size: 13px;
+            font-weight: 500;
+            cursor: pointer;
+            text-align: left;
+            font-family: 'Geist', sans-serif;
+            transition: all .2s;
+        }
+
+        .faq-cat:hover {
+            background: var(--card);
+            color: var(--white);
+        }
+
+        .faq-cat.active {
+            background: var(--card);
+            border-color: var(--border2);
+            color: var(--white);
+            font-weight: 600;
+        }
+
+        .faq-panel {
+            border: 1px solid var(--border);
+            border-radius: 14px;
+            overflow: hidden;
+            background: var(--card);
+        }
+
+        .faq-item {
+            border-bottom: 1px solid var(--border);
+        }
+
+        .faq-item:last-child {
+            border-bottom: none;
+        }
+
+        .faq-q {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 16px;
+            padding: 20px 24px;
+            cursor: pointer;
+            font-size: 14px;
+            font-weight: 600;
+            color: var(--white);
+            transition: background .2s;
+        }
+
+        .faq-q:hover {
+            background: rgba(255, 255, 255, .03);
+        }
+
+        .faq-icon {
+            flex-shrink: 0;
+            width: 20px;
+            height: 20px;
+            color: var(--gray2);
+            transition: transform .3s;
+        }
+
+        .faq-item.open .faq-icon {
+            transform: rotate(180deg);
+            color: var(--orange);
+        }
+
+        .faq-item.open .faq-q {
+            background: rgba(255, 255, 255, .03);
+        }
+
+        .faq-a {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height .4s ease, opacity .3s ease;
+            opacity: 0;
+            font-size: 13.5px;
+            color: var(--gray1);
+            line-height: 1.75;
+        }
+
+        .faq-item.open .faq-a {
+            max-height: 400px;
+            opacity: 1;
+        }
+
+        .faq-a-inner {
+            padding: 0 24px 20px;
+        }
+
+        /* ── FADE-UP on scroll ── */
+        .fade-up {
+            opacity: 0;
+            transform: translateY(28px);
+            transition: opacity .65s ease, transform .65s ease;
+        }
+
+        .fade-up.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .fade-up:nth-child(2) {
+            transition-delay: .12s
+        }
+
+        .fade-up:nth-child(3) {
+            transition-delay: .24s
+        }
+
+
+
+        /* ── ROADMAP — STRAIGHT ROW LAYOUT (reference Image 1) ── */
+        /* Override the staircase grid to a straight single row */
+        .rmap-grid-new {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 0;
+            padding: 40px 20px 20px;
+            position: relative;
+        }
+
+        /* Horizontal path line behind all nodes */
+        .rmap-path-line {
+            position: absolute;
+            top: 50%;
+            left: 0;
+            right: 0;
+            height: 2px;
+            background: rgba(255, 255, 255, .08);
+            transform: translateY(-50%);
+            z-index: 0;
+        }
+
+        @media(max-width:900px) {
+            .hero-visual {
+                display: none
+            }
+
+            .price-grid {
+                display: grid;
+                grid-template-columns: repeat(1, 1fr);
+                gap: 20px;
+                margin-bottom: 60px;
+            }
+
+            .ey-grid {
+                grid-template-columns: 1fr
+            }
+
+            .ey-item {
+                border-right: none
+            }
+
+            .features-row {
+                grid-template-columns: 1fr
+            }
+
+            nav {
+                padding: 0 16px;
+                height: 56px
+            }
+
+            .nav-links {
+                display: none
+            }
+
+            .hero {
+                padding: 74px 20px 50px;
+                min-height: auto;
+                flex-direction: column;
+                align-items: flex-start
+            }
+
+            .hero-content {
+                max-width: 100%
+            }
+
+            .hero-title {
+                font-size: clamp(32px, 8vw, 52px);
+                letter-spacing: -1.5px
+            }
+
+            .hero-sub {
+                font-size: 14px;
+                max-width: 100%
+            }
+
+            .section {
+                padding: 60px 20px
+            }
+
+            .ey-item {
+                padding: 28px 24px 0;
+                min-height: auto
+            }
+
+            .ey-title {
+                font-size: clamp(28px, 6vw, 44px)
+            }
+
+            .testimonials-section .section-center>div {
+                flex-direction: column !important;
+                gap: 8px !important
+            }
+
+            footer {
+                padding: 40px 20px 30px
+            }
+
+            .pricing-card {
+                padding: 20px
+            }
+
+            .contact-banner {
+                padding: 24px 20px;
+                flex-direction: column
+            }
+
+            .faq-layout {
+                grid-template-columns: 1fr
+            }
+
+            .faq-cats {
+                position: static;
+                flex-direction: row;
+                flex-wrap: wrap;
+                gap: 6px
+            }
+
+            .faq-cat {
+                padding: 8px 14px;
+                font-size: 12px
+            }
+
+            .ey-grid {
+                border-radius: 12px
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- NAVBAR -->
+    <nav>
+        <a href="#" class="nav-logo">
+            <div class="logo-icon">
+        <svg viewBox="0 0 24 24" fill="white">
+            <!-- Row 1: 3 dots -->
+            <circle cx="5" cy="5" r="2"></circle>
+            <circle cx="12" cy="5" r="2"></circle>
+            <circle cx="19" cy="5" r="2"></circle>
+
+            <!-- Row 2: 2 dots (left aligned) -->
+            <circle cx="5" cy="12" r="2"></circle>
+            <circle cx="12" cy="12" r="2"></circle>
+
+            <!-- Row 3: 1 dot (left aligned) -->
+            <circle cx="5" cy="19" r="2"></circle>
+        </svg>
+            </div>
+            Fundamentals
+        </a>
+        <ul class="nav-links">
+            <li><a href="#"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z" />
+                        <polyline points="9 22 9 12 15 12 15 22" />
+                    </svg>Home</a></li>
+            <li><a href="#"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <rect x="3" y="3" width="7" height="7" />
+                        <rect x="14" y="3" width="7" height="7" />
+                        <rect x="14" y="14" width="7" height="7" />
+                        <rect x="3" y="14" width="7" height="7" />
+                    </svg>Plus Dashboard</a></li>
+            <li><a href="#"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M20 12V22H4V12" />
+                        <path d="M22 7H2v5h20V7z" />
+                        <path d="M12 22V7" />
+                    </svg>Pricing</a></li>
+        </ul>
+        <div class="nav-right">
+            <button class="theme-btn"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                    stroke-width="2">
+                    <circle cx="12" cy="12" r="5" />
+                    <line x1="12" y1="1" x2="12" y2="3" />
+                    <line x1="12" y1="21" x2="12" y2="23" />
+                    <line x1="4.22" y1="4.22" x2="5.64" y2="5.64" />
+                    <line x1="18.36" y1="18.36" x2="19.78" y2="19.78" />
+                    <line x1="1" y1="12" x2="3" y2="12" />
+                    <line x1="21" y1="12" x2="23" y2="12" />
+                    <line x1="4.22" y1="19.78" x2="5.64" y2="18.36" />
+                    <line x1="18.36" y1="5.64" x2="19.78" y2="4.22" />
+                </svg></button>
+            <a href="#" class="cta-btn">Sign Up <svg width="14" height="14" viewBox="0 0 24 24" fill="none"
+                    stroke="currentColor" stroke-width="2.5">
+                    <path d="M5 12h14M12 5l7 7-7 7" />
+                </svg></a>
+        </div>
+    </nav>
+
+    <!-- HERO -->
+    <section class="hero">
+        <div class="hero-bg"></div>
+        <div class="hero-content">
+            <div class="hero-badge"><span>14,88,801+</span> Learners</div>
+            <h1 class="hero-title">AI-Integrated Learning Platform for on-campus placements</h1>
+            <p class="hero-sub">Learn DSA, System Design, and Core CS Subjects with personalised roadmaps, expert
+                sessions, and practice built for results.</p>
+            <div class="hero-actions">
+                <a href="free.html" class="btn-outline">Start Learning for Free</a>
+                <a href="dashboard.html" id="explore_plus" class="btn-primary">Explore Plus <svg width="14" height="14" viewBox="0 0 24 24" fill="none"
+                        stroke="currentColor" stroke-width="2.5">
+                        <path d="M5 12h14M12 5l7 7-7 7" />
+                    </svg></a>
+            </div>
+        </div>
+
+
+        <div class="hero-visual">
+            <div class="hero-visual-inner">
+                <!-- COL 1 -->
+                <div class="scroll-col">
+                    <div class="scroll-col-inner">
+                        <div class="panel-card">
+                            <div
+                                style="display:flex;align-items:center;gap:6px;font-size:10px;font-weight:700;letter-spacing:1px;color:var(--gray2);text-transform:uppercase;margin-bottom:10px;">
+                                <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                    stroke-width="2">
+                                    <rect x="2" y="3" width="20" height="14" rx="2" />
+                                    <line x1="8" y1="21" x2="16" y2="21" />
+                                    <line x1="12" y1="17" x2="12" y2="21" />
+                                </svg>PROBLEM</div>
+                            <div style="font-size:12px;color:var(--gray1);margin-bottom:4px;">Now your turn <span
+                                    style="color:var(--orange)">⟳</span></div>
+                            <div style="font-size:11px;color:var(--gray2);margin-bottom:2px;">Input: <span
+                                    style="font-family:'Geist Mono',monospace;color:var(--text)">n = 3, arr = [13, 1,
+                                    1]</span></div>
+                            <div style="font-size:11px;color:var(--gray2);margin-bottom:8px;">Output:</div>
+                            <div style="display:grid;grid-template-columns:1fr 1fr;gap:5px;">
+                                <div
+                                    style="background:rgba(249,115,22,.12);border:1px solid rgba(249,115,22,.25);border-radius:6px;padding:7px 10px;font-size:12px;font-weight:600;color:var(--orange);display:flex;align-items:center;gap:6px;">
+                                    <span
+                                        style="width:7px;height:7px;border-radius:50%;background:var(--orange);display:inline-block;flex-shrink:0"></span>1
+                                </div>
+                                <div
+                                    style="background:var(--orange);border-radius:6px;padding:7px 10px;font-size:12px;font-weight:600;color:white;display:flex;align-items:center;gap:6px;">
+                                    <span
+                                        style="width:7px;height:7px;border-radius:50%;background:white;display:inline-block;flex-shrink:0"></span>2
+                                </div>
+                                <div
+                                    style="background:rgba(249,115,22,.12);border:1px solid rgba(249,115,22,.25);border-radius:6px;padding:7px 10px;font-size:12px;font-weight:600;color:var(--orange);display:flex;align-items:center;gap:6px;">
+                                    <span
+                                        style="width:7px;height:7px;border-radius:50%;background:var(--orange);display:inline-block;flex-shrink:0"></span>3
+                                </div>
+                                <div
+                                    style="background:var(--orange);border-radius:6px;padding:7px 10px;font-size:12px;font-weight:600;color:white;display:flex;align-items:center;gap:6px;">
+                                    <span
+                                        style="width:7px;height:7px;border-radius:50%;background:white;display:inline-block;flex-shrink:0"></span>4
+                                </div>
+                            </div>
+                            <div style="margin-top:8px;font-size:11px;color:var(--gray2);">Constraints: <span
+                                    style="font-family:'Geist Mono',monospace;">1 ≤ n ≤ 10⁵</span></div>
+                        </div>
+                        <div class="pill-card">
+                            <div
+                                style="width:32px;height:32px;border-radius:50%;background:linear-gradient(135deg,#6366f1,#8b5cf6);display:flex;align-items:center;justify-content:center;font-weight:700;font-size:12px;flex-shrink:0;position:relative;">
+                                KS<div
+                                    style="position:absolute;bottom:-2px;right:-2px;width:14px;height:14px;background:#0a66c2;border-radius:3px;display:flex;align-items:center;justify-content:center;">
+                                    <svg width="8" height="8" viewBox="0 0 24 24" fill="white">
+                                        <path
+                                            d="M16 8a6 6 0 016 6v7h-4v-7a2 2 0 00-2-2 2 2 0 00-2 2v7h-4v-7a6 6 0 016-6zM2 9h4v12H2z" />
+                                        <circle cx="4" cy="4" r="2" />
+                                    </svg></div>
+                            </div>
+                            <div>
+                                <div style="font-size:12px;font-weight:600;color:white;">Kushagra Sahay</div>
+                                <div style="font-size:10px;color:var(--gray2);">Joined <span
+                                        style="color:#0a66c2;font-weight:600;">LinkedIn</span></div>
+                            </div>
+                        </div>
+                        <div class="panel-card"
+                            style="font-family:'Geist Mono',monospace;font-size:11px;line-height:1.7;">
+                            <div
+                                style="font-size:10px;font-weight:700;letter-spacing:1px;color:var(--gray2);margin-bottom:8px;text-transform:uppercase;">
+                                Solution</div>
+                            <div><span style="color:#c084fc">def</span> <span style="color:#60a5fa">twoSum</span><span
+                                    style="color:var(--gray1)">(nums, target):</span></div>
+                            <div><span style="color:var(--gray2)"> seen = {}</span></div>
+                            <div><span style="color:#c084fc"> for</span> <span style="color:#60a5fa">i, n</span> <span
+                                    style="color:#c084fc">in</span> <span
+                                    style="color:var(--gray1)">enumerate(nums):</span></div>
+                            <div><span style="color:var(--gray2)"> diff = target - n</span></div>
+                            <div><span style="color:#c084fc"> if</span> <span style="color:var(--gray1)">diff</span>
+                                <span style="color:#c084fc">in</span> <span style="color:var(--gray1)">seen:</span>
+                            </div>
+                            <div><span style="color:#22c55e"> return</span> <span
+                                    style="color:var(--gray1)">[seen[diff], i]</span></div>
+                        </div>
+                        <div class="pill-card">
+                            <div
+                                style="width:32px;height:32px;border-radius:50%;background:linear-gradient(135deg,#f97316,#fbbf24);display:flex;align-items:center;justify-content:center;font-weight:700;font-size:12px;flex-shrink:0;position:relative;">
+                                RS<div
+                                    style="position:absolute;bottom:-2px;right:-2px;width:14px;height:14px;background:#ff9900;border-radius:3px;display:flex;align-items:center;justify-content:center;font-size:8px;font-weight:800;color:white;">
+                                    A</div>
+                            </div>
+                            <div>
+                                <div style="font-size:12px;font-weight:600;color:white;">Rohit Sharma</div>
+                                <div style="font-size:10px;color:var(--gray2);">Joined <span
+                                        style="color:#ff9900;font-weight:600;">amazon</span></div>
+                            </div>
+                        </div>
+                        <div class="panel-card">
+                            <div
+                                style="font-size:10px;font-weight:700;letter-spacing:1px;color:var(--gray2);text-transform:uppercase;margin-bottom:10px;">
+                                Hints</div>
+                            <div
+                                style="background:rgba(255,255,255,.04);border:1px solid var(--border);border-radius:6px;padding:8px 12px;font-size:12px;color:var(--gray1);margin-bottom:6px;">
+                                Hint 1 — Try using a hash map</div>
+                            <div
+                                style="background:rgba(255,255,255,.04);border:1px solid var(--border);border-radius:6px;padding:8px 12px;font-size:12px;color:var(--gray2);">
+                                Hint 2 — One pass is enough</div>
+                        </div>
+                        <!-- dupe -->
+                        <div class="panel-card">
+                            <div
+                                style="display:flex;align-items:center;gap:6px;font-size:10px;font-weight:700;letter-spacing:1px;color:var(--gray2);text-transform:uppercase;margin-bottom:10px;">
+                                <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                    stroke-width="2">
+                                    <rect x="2" y="3" width="20" height="14" rx="2" />
+                                    <line x1="8" y1="21" x2="16" y2="21" />
+                                    <line x1="12" y1="17" x2="12" y2="21" />
+                                </svg>PROBLEM</div>
+                            <div style="font-size:12px;color:var(--gray1);margin-bottom:4px;">Now your turn <span
+                                    style="color:var(--orange)">⟳</span></div>
+                            <div style="font-size:11px;color:var(--gray2);margin-bottom:2px;">Input: <span
+                                    style="font-family:'Geist Mono',monospace;color:var(--text)">n = 3, arr = [13, 1,
+                                    1]</span></div>
+                            <div style="font-size:11px;color:var(--gray2);margin-bottom:8px;">Output:</div>
+                            <div style="display:grid;grid-template-columns:1fr 1fr;gap:5px;">
+                                <div
+                                    style="background:rgba(249,115,22,.12);border:1px solid rgba(249,115,22,.25);border-radius:6px;padding:7px 10px;font-size:12px;font-weight:600;color:var(--orange);display:flex;align-items:center;gap:6px;">
+                                    <span
+                                        style="width:7px;height:7px;border-radius:50%;background:var(--orange);display:inline-block;flex-shrink:0"></span>1
+                                </div>
+                                <div
+                                    style="background:var(--orange);border-radius:6px;padding:7px 10px;font-size:12px;font-weight:600;color:white;display:flex;align-items:center;gap:6px;">
+                                    <span
+                                        style="width:7px;height:7px;border-radius:50%;background:white;display:inline-block;flex-shrink:0"></span>2
+                                </div>
+                                <div
+                                    style="background:rgba(249,115,22,.12);border:1px solid rgba(249,115,22,.25);border-radius:6px;padding:7px 10px;font-size:12px;font-weight:600;color:var(--orange);display:flex;align-items:center;gap:6px;">
+                                    <span
+                                        style="width:7px;height:7px;border-radius:50%;background:var(--orange);display:inline-block;flex-shrink:0"></span>3
+                                </div>
+                                <div
+                                    style="background:var(--orange);border-radius:6px;padding:7px 10px;font-size:12px;font-weight:600;color:white;display:flex;align-items:center;gap:6px;">
+                                    <span
+                                        style="width:7px;height:7px;border-radius:50%;background:white;display:inline-block;flex-shrink:0"></span>4
+                                </div>
+                            </div>
+                            <div style="margin-top:8px;font-size:11px;color:var(--gray2);">Constraints: <span
+                                    style="font-family:'Geist Mono',monospace;">1 ≤ n ≤ 10⁵</span></div>
+                        </div>
+                        <div class="pill-card">
+                            <div
+                                style="width:32px;height:32px;border-radius:50%;background:linear-gradient(135deg,#6366f1,#8b5cf6);display:flex;align-items:center;justify-content:center;font-weight:700;font-size:12px;flex-shrink:0;position:relative;">
+                                KS<div
+                                    style="position:absolute;bottom:-2px;right:-2px;width:14px;height:14px;background:#0a66c2;border-radius:3px;display:flex;align-items:center;justify-content:center;">
+                                    <svg width="8" height="8" viewBox="0 0 24 24" fill="white">
+                                        <path
+                                            d="M16 8a6 6 0 016 6v7h-4v-7a2 2 0 00-2-2 2 2 0 00-2 2v7h-4v-7a6 6 0 016-6zM2 9h4v12H2z" />
+                                        <circle cx="4" cy="4" r="2" />
+                                    </svg></div>
+                            </div>
+                            <div>
+                                <div style="font-size:12px;font-weight:600;color:white;">Kushagra Sahay</div>
+                                <div style="font-size:10px;color:var(--gray2);">Joined <span
+                                        style="color:#0a66c2;font-weight:600;">LinkedIn</span></div>
+                            </div>
+                        </div>
+                        <div class="panel-card"
+                            style="font-family:'Geist Mono',monospace;font-size:11px;line-height:1.7;">
+                            <div
+                                style="font-size:10px;font-weight:700;letter-spacing:1px;color:var(--gray2);margin-bottom:8px;text-transform:uppercase;">
+                                Solution</div>
+                            <div><span style="color:#c084fc">def</span> <span style="color:#60a5fa">twoSum</span><span
+                                    style="color:var(--gray1)">(nums, target):</span></div>
+                            <div><span style="color:var(--gray2)"> seen = {}</span></div>
+                            <div><span style="color:#c084fc"> for</span> <span style="color:#60a5fa">i, n</span> <span
+                                    style="color:#c084fc">in</span> <span
+                                    style="color:var(--gray1)">enumerate(nums):</span></div>
+                            <div><span style="color:var(--gray2)"> diff = target - n</span></div>
+                            <div><span style="color:#c084fc"> if</span> <span style="color:var(--gray1)">diff</span>
+                                <span style="color:#c084fc">in</span> <span style="color:var(--gray1)">seen:</span>
+                            </div>
+                            <div><span style="color:#22c55e"> return</span> <span
+                                    style="color:var(--gray1)">[seen[diff], i]</span></div>
+                        </div>
+                        <div class="pill-card">
+                            <div
+                                style="width:32px;height:32px;border-radius:50%;background:linear-gradient(135deg,#f97316,#fbbf24);display:flex;align-items:center;justify-content:center;font-weight:700;font-size:12px;flex-shrink:0;position:relative;">
+                                RS<div
+                                    style="position:absolute;bottom:-2px;right:-2px;width:14px;height:14px;background:#ff9900;border-radius:3px;display:flex;align-items:center;justify-content:center;font-size:8px;font-weight:800;color:white;">
+                                    A</div>
+                            </div>
+                            <div>
+                                <div style="font-size:12px;font-weight:600;color:white;">Rohit Sharma</div>
+                                <div style="font-size:10px;color:var(--gray2);">Joined <span
+                                        style="color:#ff9900;font-weight:600;">amazon</span></div>
+                            </div>
+                        </div>
+                        <div class="panel-card">
+                            <div
+                                style="font-size:10px;font-weight:700;letter-spacing:1px;color:var(--gray2);text-transform:uppercase;margin-bottom:10px;">
+                                Hints</div>
+                            <div
+                                style="background:rgba(255,255,255,.04);border:1px solid var(--border);border-radius:6px;padding:8px 12px;font-size:12px;color:var(--gray1);margin-bottom:6px;">
+                                Hint 1 — Try using a hash map</div>
+                            <div
+                                style="background:rgba(255,255,255,.04);border:1px solid var(--border);border-radius:6px;padding:8px 12px;font-size:12px;color:var(--gray2);">
+                                Hint 2 — One pass is enough</div>
+                        </div>
+                    </div>
+                </div>
+                <!-- COL 2 -->
+                <div class="scroll-col">
+                    <div class="scroll-col-inner">
+                        <div class="panel-card">
+                            <div
+                                style="font-size:10px;font-weight:700;letter-spacing:1px;color:var(--gray2);text-transform:uppercase;margin-bottom:10px;">
+                                A2Z DSA SHEET</div>
+                            <div style="font-size:12px;font-weight:600;color:var(--gray2);margin-bottom:6px;"><span
+                                    style="color:var(--gray3)">1</span> Learn the basics</div>
+                            <div style="font-size:12px;font-weight:700;color:var(--text);margin:8px 0 6px;"><span
+                                    style="color:var(--orange)">2</span> Learn Important Sorting Techniques</div>
+                            <div style="display:flex;flex-direction:column;gap:4px;">
+                                <div style="display:flex;align-items:center;gap:7px;font-size:12px;color:var(--text);">
+                                    <div
+                                        style="width:15px;height:15px;border-radius:4px;background:var(--orange);display:flex;align-items:center;justify-content:center;flex-shrink:0;">
+                                        <svg width="9" height="9" viewBox="0 0 12 12" fill="none" stroke="white"
+                                            stroke-width="2.5">
+                                            <polyline points="2,6 5,9 10,3" />
+                                        </svg></div>Selection Sort
+                                </div>
+                                <div style="display:flex;align-items:center;gap:7px;font-size:12px;color:var(--text);">
+                                    <div
+                                        style="width:15px;height:15px;border-radius:4px;background:var(--orange);display:flex;align-items:center;justify-content:center;flex-shrink:0;">
+                                        <svg width="9" height="9" viewBox="0 0 12 12" fill="none" stroke="white"
+                                            stroke-width="2.5">
+                                            <polyline points="2,6 5,9 10,3" />
+                                        </svg></div>Bubble Sort
+                                </div>
+                                <div style="display:flex;align-items:center;gap:7px;font-size:12px;color:var(--text);">
+                                    <div
+                                        style="width:15px;height:15px;border-radius:4px;background:var(--orange);display:flex;align-items:center;justify-content:center;flex-shrink:0;">
+                                        <svg width="9" height="9" viewBox="0 0 12 12" fill="none" stroke="white"
+                                            stroke-width="2.5">
+                                            <polyline points="2,6 5,9 10,3" />
+                                        </svg></div>Insertion Sort
+                                </div>
+                                <div style="display:flex;align-items:center;gap:7px;font-size:12px;color:var(--text);">
+                                    <div
+                                        style="width:15px;height:15px;border-radius:4px;background:var(--orange);display:flex;align-items:center;justify-content:center;flex-shrink:0;">
+                                        <svg width="9" height="9" viewBox="0 0 12 12" fill="none" stroke="white"
+                                            stroke-width="2.5">
+                                            <polyline points="2,6 5,9 10,3" />
+                                        </svg></div>Merge Sort
+                                </div>
+                                <div style="display:flex;align-items:center;gap:7px;font-size:12px;color:var(--text);">
+                                    <div
+                                        style="width:15px;height:15px;border-radius:4px;background:var(--orange);display:flex;align-items:center;justify-content:center;flex-shrink:0;">
+                                        <svg width="9" height="9" viewBox="0 0 12 12" fill="none" stroke="white"
+                                            stroke-width="2.5">
+                                            <polyline points="2,6 5,9 10,3" />
+                                        </svg></div>Quick Sort
+                                </div>
+                            </div>
+                            <div style="font-size:12px;font-weight:600;color:var(--gray2);margin-top:10px;"><span
+                                    style="color:var(--gray3)">3</span> Solve Problems on Arrays</div>
+                        </div>
+                        <div class="panel-card" style="display:flex;align-items:center;gap:12px;">
+                            <div
+                                style="width:44px;height:44px;border-radius:8px;background:#f7df1e;display:flex;align-items:center;justify-content:center;font-weight:900;font-size:14px;color:#1a1a1a;flex-shrink:0;">
+                                JS</div>
+                            <div>
+                                <div style="font-size:13px;font-weight:600;color:white;">JavaScript</div>
+                                <div style="font-size:11px;color:var(--gray2);">Selected language</div>
+                            </div>
+                        </div>
+                        <div class="pill-card">
+                            <div
+                                style="width:32px;height:32px;border-radius:50%;background:linear-gradient(135deg,#10b981,#059669);display:flex;align-items:center;justify-content:center;font-weight:700;font-size:12px;flex-shrink:0;position:relative;">
+                                AJ<div
+                                    style="position:absolute;bottom:-2px;right:-2px;width:14px;height:14px;background:#0078d4;border-radius:3px;display:flex;align-items:center;justify-content:center;font-size:7px;font-weight:900;color:white;">
+                                    D</div>
+                            </div>
+                            <div>
+                                <div style="font-size:12px;font-weight:600;color:white;">Anusha Jha</div>
+                                <div style="font-size:10px;color:var(--gray2);">Joined <span
+                                        style="color:#0078d4;font-weight:600;">Deloitte</span></div>
+                            </div>
+                        </div>
+                        <div class="panel-card">
+                            <div
+                                style="font-size:10px;font-weight:700;letter-spacing:1px;color:var(--gray2);text-transform:uppercase;margin-bottom:10px;">
+                                Frequently Asked</div>
+                            <div
+                                style="background:rgba(255,255,255,.04);border:1px solid var(--border);border-radius:6px;padding:8px 12px;font-size:12px;color:var(--gray1);margin-bottom:6px;">
+                                What is the time complexity?</div>
+                            <div
+                                style="background:rgba(255,255,255,.04);border:1px solid var(--border);border-radius:6px;padding:8px 12px;font-size:12px;color:var(--gray2);">
+                                Can I use extra space?</div>
+                        </div>
+                        <div class="panel-card" style="display:flex;align-items:center;gap:12px;">
+                            <div
+                                style="width:44px;height:44px;border-radius:8px;background:linear-gradient(135deg,#3572A5,#FFD43B);display:flex;align-items:center;justify-content:center;font-size:22px;flex-shrink:0;">
+                                🐍</div>
+                            <div>
+                                <div style="font-size:13px;font-weight:600;color:white;">Python</div>
+                                <div style="font-size:11px;color:var(--gray2);">Selected language</div>
+                            </div>
+                        </div>
+                        <!-- dupe -->
+                        <div class="panel-card">
+                            <div
+                                style="font-size:10px;font-weight:700;letter-spacing:1px;color:var(--gray2);text-transform:uppercase;margin-bottom:10px;">
+                                A2Z DSA SHEET</div>
+                            <div style="font-size:12px;font-weight:600;color:var(--gray2);margin-bottom:6px;"><span
+                                    style="color:var(--gray3)">1</span> Learn the basics</div>
+                            <div style="font-size:12px;font-weight:700;color:var(--text);margin:8px 0 6px;"><span
+                                    style="color:var(--orange)">2</span> Learn Important Sorting Techniques</div>
+                            <div style="display:flex;flex-direction:column;gap:4px;">
+                                <div style="display:flex;align-items:center;gap:7px;font-size:12px;color:var(--text);">
+                                    <div
+                                        style="width:15px;height:15px;border-radius:4px;background:var(--orange);display:flex;align-items:center;justify-content:center;flex-shrink:0;">
+                                        <svg width="9" height="9" viewBox="0 0 12 12" fill="none" stroke="white"
+                                            stroke-width="2.5">
+                                            <polyline points="2,6 5,9 10,3" />
+                                        </svg></div>Selection Sort
+                                </div>
+                                <div style="display:flex;align-items:center;gap:7px;font-size:12px;color:var(--text);">
+                                    <div
+                                        style="width:15px;height:15px;border-radius:4px;background:var(--orange);display:flex;align-items:center;justify-content:center;flex-shrink:0;">
+                                        <svg width="9" height="9" viewBox="0 0 12 12" fill="none" stroke="white"
+                                            stroke-width="2.5">
+                                            <polyline points="2,6 5,9 10,3" />
+                                        </svg></div>Bubble Sort
+                                </div>
+                                <div style="display:flex;align-items:center;gap:7px;font-size:12px;color:var(--text);">
+                                    <div
+                                        style="width:15px;height:15px;border-radius:4px;background:var(--orange);display:flex;align-items:center;justify-content:center;flex-shrink:0;">
+                                        <svg width="9" height="9" viewBox="0 0 12 12" fill="none" stroke="white"
+                                            stroke-width="2.5">
+                                            <polyline points="2,6 5,9 10,3" />
+                                        </svg></div>Insertion Sort
+                                </div>
+                                <div style="display:flex;align-items:center;gap:7px;font-size:12px;color:var(--text);">
+                                    <div
+                                        style="width:15px;height:15px;border-radius:4px;background:var(--orange);display:flex;align-items:center;justify-content:center;flex-shrink:0;">
+                                        <svg width="9" height="9" viewBox="0 0 12 12" fill="none" stroke="white"
+                                            stroke-width="2.5">
+                                            <polyline points="2,6 5,9 10,3" />
+                                        </svg></div>Merge Sort
+                                </div>
+                                <div style="display:flex;align-items:center;gap:7px;font-size:12px;color:var(--text);">
+                                    <div
+                                        style="width:15px;height:15px;border-radius:4px;background:var(--orange);display:flex;align-items:center;justify-content:center;flex-shrink:0;">
+                                        <svg width="9" height="9" viewBox="0 0 12 12" fill="none" stroke="white"
+                                            stroke-width="2.5">
+                                            <polyline points="2,6 5,9 10,3" />
+                                        </svg></div>Quick Sort
+                                </div>
+                            </div>
+                            <div style="font-size:12px;font-weight:600;color:var(--gray2);margin-top:10px;"><span
+                                    style="color:var(--gray3)">3</span> Solve Problems on Arrays</div>
+                        </div>
+                        <div class="panel-card" style="display:flex;align-items:center;gap:12px;">
+                            <div
+                                style="width:44px;height:44px;border-radius:8px;background:#f7df1e;display:flex;align-items:center;justify-content:center;font-weight:900;font-size:14px;color:#1a1a1a;flex-shrink:0;">
+                                JS</div>
+                            <div>
+                                <div style="font-size:13px;font-weight:600;color:white;">JavaScript</div>
+                                <div style="font-size:11px;color:var(--gray2);">Selected language</div>
+                            </div>
+                        </div>
+                        <div class="pill-card">
+                            <div
+                                style="width:32px;height:32px;border-radius:50%;background:linear-gradient(135deg,#10b981,#059669);display:flex;align-items:center;justify-content:center;font-weight:700;font-size:12px;flex-shrink:0;position:relative;">
+                                AJ<div
+                                    style="position:absolute;bottom:-2px;right:-2px;width:14px;height:14px;background:#0078d4;border-radius:3px;display:flex;align-items:center;justify-content:center;font-size:7px;font-weight:900;color:white;">
+                                    D</div>
+                            </div>
+                            <div>
+                                <div style="font-size:12px;font-weight:600;color:white;">Anusha Jha</div>
+                                <div style="font-size:10px;color:var(--gray2);">Joined <span
+                                        style="color:#0078d4;font-weight:600;">Deloitte</span></div>
+                            </div>
+                        </div>
+                        <div class="panel-card">
+                            <div
+                                style="font-size:10px;font-weight:700;letter-spacing:1px;color:var(--gray2);text-transform:uppercase;margin-bottom:10px;">
+                                Frequently Asked</div>
+                            <div
+                                style="background:rgba(255,255,255,.04);border:1px solid var(--border);border-radius:6px;padding:8px 12px;font-size:12px;color:var(--gray1);margin-bottom:6px;">
+                                What is the time complexity?</div>
+                            <div
+                                style="background:rgba(255,255,255,.04);border:1px solid var(--border);border-radius:6px;padding:8px 12px;font-size:12px;color:var(--gray2);">
+                                Can I use extra space?</div>
+                        </div>
+                        <div class="panel-card" style="display:flex;align-items:center;gap:12px;">
+                            <div
+                                style="width:44px;height:44px;border-radius:8px;background:linear-gradient(135deg,#3572A5,#FFD43B);display:flex;align-items:center;justify-content:center;font-size:22px;flex-shrink:0;">
+                                🐍</div>
+                            <div>
+                                <div style="font-size:13px;font-weight:600;color:white;">Python</div>
+                                <div style="font-size:11px;color:var(--gray2);">Selected language</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- COL 3 -->
+                <div class="scroll-col">
+                    <div class="scroll-col-inner">
+                        <div class="panel-card" style="text-align:center;">
+                            <div
+                                style="font-size:10px;font-weight:700;letter-spacing:1px;color:var(--gray2);text-transform:uppercase;margin-bottom:8px;">
+                                Company</div>
+                            <div style="display:flex;gap:6px;flex-wrap:wrap;justify-content:center;">
+                                <div
+                                    style="padding:4px 10px;border-radius:999px;border:1px solid var(--border2);font-size:11px;color:var(--gray1);">
+                                    Google</div>
+                                <div
+                                    style="padding:4px 10px;border-radius:999px;border:1px solid var(--border2);font-size:11px;color:var(--gray1);">
+                                    Amazon</div>
+                                <div
+                                    style="padding:4px 10px;border-radius:999px;background:var(--orange);border:1px solid var(--orange);font-size:11px;color:white;font-weight:600;">
+                                    Apple</div>
+                                <div
+                                    style="padding:4px 10px;border-radius:999px;border:1px solid var(--border2);font-size:11px;color:var(--gray1);">
+                                    Microsoft</div>
+                            </div>
+                        </div>
+                        <div class="pill-card">
+                            <div
+                                style="width:32px;height:32px;border-radius:50%;background:linear-gradient(135deg,#3b82f6,#1d4ed8);display:flex;align-items:center;justify-content:center;font-weight:700;font-size:12px;flex-shrink:0;position:relative;">
+                                PM<div
+                                    style="position:absolute;bottom:-2px;right:-2px;width:14px;height:14px;background:#ff9900;border-radius:3px;display:flex;align-items:center;justify-content:center;font-size:7px;font-weight:900;color:white;">
+                                    A</div>
+                            </div>
+                            <div>
+                                <div style="font-size:12px;font-weight:600;color:white;">Prateek Malhotra</div>
+                                <div style="font-size:10px;color:var(--gray2);">Joined <span
+                                        style="color:#ff9900;font-weight:600;">Amazon</span></div>
+                            </div>
+                        </div>
+                        <div class="panel-card">
+                            <div
+                                style="font-size:10px;font-weight:700;letter-spacing:1px;color:var(--gray2);text-transform:uppercase;margin-bottom:10px;">
+                                Your Progress</div>
+                            <div style="display:flex;flex-direction:column;gap:8px;">
+                                <div>
+                                    <div
+                                        style="display:flex;justify-content:space-between;font-size:11px;color:var(--gray1);margin-bottom:4px;">
+                                        <span>DSA Problems</span><span style="color:var(--orange)">247 / 455</span>
+                                    </div>
+                                    <div style="height:4px;background:var(--bg3);border-radius:999px;overflow:hidden;">
+                                        <div
+                                            style="height:100%;width:54%;background:var(--orange);border-radius:999px;">
+                                        </div>
+                                    </div>
+                                </div>
+                                <div>
+                                    <div
+                                        style="display:flex;justify-content:space-between;font-size:11px;color:var(--gray1);margin-bottom:4px;">
+                                        <span>System Design</span><span style="color:#10b981">12 / 25</span></div>
+                                    <div style="height:4px;background:var(--bg3);border-radius:999px;overflow:hidden;">
+                                        <div style="height:100%;width:48%;background:#10b981;border-radius:999px;">
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="panel-card" style="display:flex;align-items:center;gap:12px;">
+                            <div
+                                style="width:44px;height:44px;border-radius:8px;background:linear-gradient(135deg,#6366f1,#4f46e5);display:flex;align-items:center;justify-content:center;font-weight:900;font-size:12px;color:white;flex-shrink:0;">
+                                C++</div>
+                            <div>
+                                <div style="font-size:13px;font-weight:600;color:white;">C++</div>
+                                <div style="font-size:11px;color:var(--gray2);">Selected language</div>
+                            </div>
+                        </div>
+                        <div class="pill-card">
+                            <div
+                                style="width:32px;height:32px;border-radius:50%;background:linear-gradient(135deg,#f59e0b,#d97706);display:flex;align-items:center;justify-content:center;font-weight:700;font-size:12px;flex-shrink:0;position:relative;">
+                                SK<div
+                                    style="position:absolute;bottom:-2px;right:-2px;width:14px;height:14px;background:#4285f4;border-radius:3px;display:flex;align-items:center;justify-content:center;font-size:8px;font-weight:900;color:white;">
+                                    G</div>
+                            </div>
+                            <div>
+                                <div style="font-size:12px;font-weight:600;color:white;">Satyam Kumar</div>
+                                <div style="font-size:10px;color:var(--gray2);">Joined <span
+                                        style="color:#4285f4;font-weight:600;">Google</span></div>
+                            </div>
+                        </div>
+                        <!-- dupe -->
+                        <div class="panel-card" style="text-align:center;">
+                            <div
+                                style="font-size:10px;font-weight:700;letter-spacing:1px;color:var(--gray2);text-transform:uppercase;margin-bottom:8px;">
+                                Company</div>
+                            <div style="display:flex;gap:6px;flex-wrap:wrap;justify-content:center;">
+                                <div
+                                    style="padding:4px 10px;border-radius:999px;border:1px solid var(--border2);font-size:11px;color:var(--gray1);">
+                                    Google</div>
+                                <div
+                                    style="padding:4px 10px;border-radius:999px;border:1px solid var(--border2);font-size:11px;color:var(--gray1);">
+                                    Amazon</div>
+                                <div
+                                    style="padding:4px 10px;border-radius:999px;background:var(--orange);border:1px solid var(--orange);font-size:11px;color:white;font-weight:600;">
+                                    Apple</div>
+                                <div
+                                    style="padding:4px 10px;border-radius:999px;border:1px solid var(--border2);font-size:11px;color:var(--gray1);">
+                                    Microsoft</div>
+                            </div>
+                        </div>
+                        <div class="pill-card">
+                            <div
+                                style="width:32px;height:32px;border-radius:50%;background:linear-gradient(135deg,#3b82f6,#1d4ed8);display:flex;align-items:center;justify-content:center;font-weight:700;font-size:12px;flex-shrink:0;position:relative;">
+                                PM<div
+                                    style="position:absolute;bottom:-2px;right:-2px;width:14px;height:14px;background:#ff9900;border-radius:3px;display:flex;align-items:center;justify-content:center;font-size:7px;font-weight:900;color:white;">
+                                    A</div>
+                            </div>
+                            <div>
+                                <div style="font-size:12px;font-weight:600;color:white;">Prateek Malhotra</div>
+                                <div style="font-size:10px;color:var(--gray2);">Joined <span
+                                        style="color:#ff9900;font-weight:600;">Amazon</span></div>
+                            </div>
+                        </div>
+                        <div class="panel-card">
+                            <div
+                                style="font-size:10px;font-weight:700;letter-spacing:1px;color:var(--gray2);text-transform:uppercase;margin-bottom:10px;">
+                                Your Progress</div>
+                            <div style="display:flex;flex-direction:column;gap:8px;">
+                                <div>
+                                    <div
+                                        style="display:flex;justify-content:space-between;font-size:11px;color:var(--gray1);margin-bottom:4px;">
+                                        <span>DSA Problems</span><span style="color:var(--orange)">247 / 455</span>
+                                    </div>
+                                    <div style="height:4px;background:var(--bg3);border-radius:999px;overflow:hidden;">
+                                        <div
+                                            style="height:100%;width:54%;background:var(--orange);border-radius:999px;">
+                                        </div>
+                                    </div>
+                                </div>
+                                <div>
+                                    <div
+                                        style="display:flex;justify-content:space-between;font-size:11px;color:var(--gray1);margin-bottom:4px;">
+                                        <span>System Design</span><span style="color:#10b981">12 / 25</span></div>
+                                    <div style="height:4px;background:var(--bg3);border-radius:999px;overflow:hidden;">
+                                        <div style="height:100%;width:48%;background:#10b981;border-radius:999px;">
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="panel-card" style="display:flex;align-items:center;gap:12px;">
+                            <div
+                                style="width:44px;height:44px;border-radius:8px;background:linear-gradient(135deg,#6366f1,#4f46e5);display:flex;align-items:center;justify-content:center;font-weight:900;font-size:12px;color:white;flex-shrink:0;">
+                                C++</div>
+                            <div>
+                                <div style="font-size:13px;font-weight:600;color:white;">C++</div>
+                                <div style="font-size:11px;color:var(--gray2);">Selected language</div>
+                            </div>
+                        </div>
+                        <div class="pill-card">
+                            <div
+                                style="width:32px;height:32px;border-radius:50%;background:linear-gradient(135deg,#f59e0b,#d97706);display:flex;align-items:center;justify-content:center;font-weight:700;font-size:12px;flex-shrink:0;position:relative;">
+                                SK<div
+                                    style="position:absolute;bottom:-2px;right:-2px;width:14px;height:14px;background:#4285f4;border-radius:3px;display:flex;align-items:center;justify-content:center;font-size:8px;font-weight:900;color:white;">
+                                    G</div>
+                            </div>
+                            <div>
+                                <div style="font-size:12px;font-weight:600;color:white;">Satyam Kumar</div>
+                                <div style="font-size:10px;color:var(--gray2);">Joined <span
+                                        style="color:#4285f4;font-weight:600;">Google</span></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- EVERYTHING YOU NEED -->
+    <section class="section ey-section">
+        <div class="section-center">
+            <div
+                style="display:flex;align-items:flex-start;justify-content:space-between;gap:40px;flex-wrap:wrap;margin-bottom:70px;">
+                <h2 class="ey-title fade-up"><span class="dim">Everything You<br>Need To </span>Crack<br>Tech Interviews
+                </h2>
+                <p class="ey-desc fade-up" style="padding-top:8px;">A single platform that combines structured learning,
+                    real practice, and expert guidance so you can master coding, system design, and core CS subjects
+                    with confidence.</p>
+            </div>
+
+            <div class="ey-grid fade-up">
+
+                <!-- ═══ 1: COMPANY SPECIFIC ═══ -->
+                <div class="ey-item">
+                    <div class="ey-item-label">Company-Specific Interview Prep</div>
+                    <div class="ey-item-title">Target your dream company</div>
+                    <div class="ey-item-desc">Practice sets curated for companies like Google, Amazon, Microsoft, and
+                        more. Train with their most frequently asked questions to build confidence and precision.</div>
+                    <div class="cp-panel">
+                        <div class="cp-tabs-bar" id="cpTabs">
+                            <div class="cp-tab">Google</div>
+                            <div class="cp-tab active">Amazon</div>
+                            <div class="cp-tab">Stripe</div>
+                            <div class="cp-tab">Netflix</div>
+                            <div class="cp-tab">Apple</div>
+                            <div class="cp-tab">Facebook</div>
+                            <div class="cp-tab">Microsoft</div>
+                        </div>
+                        <div class="cp-list-wrap" id="cpListWrap">
+                            <div class="cp-list" id="cpList"></div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- ═══ 2: PERSONALIZED ROADMAPS ═══ -->
+                <div class="ey-item">
+                    <div class="ey-item-label">Personalized Roadmaps</div>
+                    <div class="ey-item-title">Create a custom learning path</div>
+                    <div class="ey-item-desc">Based on your schedule and skill level. Whether you have 2 months or 12,
+                        get a clear step-by-step roadmap that keeps you focused.</div>
+                    <div class="roadmap-container">
+                        <div class="rmap-grid" id="rmapGrid">
+                            <!-- Row 1: main nodes -->
+                            <div class="rmap-node active" id="rn0">
+                                <div class="rmap-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                        stroke-width="1.5">
+                                        <circle cx="5" cy="5" r="2" />
+                                        <circle cx="12" cy="5" r="2" />
+                                        <circle cx="19" cy="5" r="2" />
+                                        <circle cx="5" cy="12" r="2" />
+                                        <circle cx="12" cy="12" r="3" />
+                                        <circle cx="19" cy="12" r="2" />
+                                        <circle cx="5" cy="19" r="2" />
+                                        <circle cx="12" cy="19" r="2" />
+                                        <circle cx="19" cy="19" r="2" />
+                                        <line x1="7" y1="5" x2="10" y2="5" />
+                                        <line x1="14" y1="5" x2="17" y2="5" />
+                                        <line x1="5" y1="7" x2="5" y2="10" />
+                                        <line x1="19" y1="7" x2="19" y2="10" />
+                                        <line x1="7" y1="12" x2="9" y2="12" />
+                                        <line x1="15" y1="12" x2="17" y2="12" />
+                                    </svg></div>
+                                <div class="rmap-label">Structured<br>Learning</div>
+                            </div>
+                            <div class="rmap-node" id="rn1">
+                                <div class="rmap-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                        stroke-width="1.5">
+                                        <rect x="3" y="3" width="18" height="18" rx="2" />
+                                        <rect x="7" y="7" width="4" height="4" rx="1" />
+                                        <rect x="13" y="7" width="4" height="4" rx="1" />
+                                        <rect x="7" y="13" width="4" height="4" rx="1" />
+                                        <circle cx="15" cy="15" r="2" />
+                                    </svg></div>
+                                <div class="rmap-label">Focused<br>Practise</div>
+                            </div>
+                            <div class="rmap-node" id="rn2">
+                                <div class="rmap-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                        stroke-width="1.5">
+                                        <path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2" />
+                                        <circle cx="9" cy="7" r="4" />
+                                        <path d="M23 21v-2a4 4 0 00-3-3.87M16 3.13a4 4 0 010 7.75" />
+                                    </svg></div>
+                                <div class="rmap-label">Expert<br>Feedback</div>
+                            </div>
+                            <div class="rmap-node" id="rn3">
+                                <div class="rmap-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                        stroke-width="1.5">
+                                        <path d="M8 21l4-4 4 4" />
+                                        <path d="M12 3v14" />
+                                        <path d="M5 8l7-5 7 5" />
+                                        <path d="M3 21h18" />
+                                    </svg></div>
+                                <div class="rmap-label">Dream<br>Offer</div>
+                            </div>
+                            <!-- Row 2: faded placeholders -->
+                            <div class="rmap-node empty"></div>
+                            <div class="rmap-node empty"></div>
+                            <div class="rmap-node empty"></div>
+                            <div class="rmap-node empty"></div>
+                            <!-- Row 3: more faded -->
+                            <!-- <div class="rmap-node empty" style="opacity:.07"></div><div class="rmap-node empty" style="opacity:.07"></div><div class="rmap-node empty" style="opacity:.07"></div><div class="rmap-node empty" style="opacity:.07"></div> -->
+                        </div>
+                    </div>
+                </div>
+
+                <!-- ═══ 3: MASTER DSA ═══ -->
+                <div class="ey-item">
+                    <div class="ey-item-label">Master DSA, System Design, and Core CS</div>
+                    <div class="ey-item-title">1000+ problems, complete coverage</div>
+                    <div class="ey-item-desc">Build a rock-solid foundation with 1000+ DSA problems, 100+ system design
+                        challenges, and complete coverage of DBMS, OS, and CN to ace every coding interview.</div>
+                    <div class="dsa-panel" id="dsaPanel">
+                        <div class="dsa-card">
+                            <div class="dsa-card-title">House Robber</div>
+                            <div class="dsa-meta"><span>⏱ 25 min.</span><span class="badge med">Medium</span><span
+                                    class="badge tag">Dynamic Programming</span></div>
+                        </div>
+                        <div class="dsa-card">
+                            <div class="dsa-card-title">Climbing Stairs</div>
+                            <div class="dsa-meta"><span>⏱ 20 min.</span><span class="badge easy">Easy</span><span
+                                    class="badge tag">Dynamic Programming</span></div>
+                        </div>
+                        <div class="dsa-card hl" id="dsaHl">
+                            <div class="dsa-card-title">Course Schedule</div>
+                            <div class="dsa-meta"><span>⏱ 40 min.</span><span class="badge med">Medium</span><span
+                                    class="badge tag">Graph</span></div>
+                        </div>
+                        <div class="dsa-card">
+                            <div class="dsa-card-title">Reverse Linked List</div>
+                            <div class="dsa-meta"><span>⏱ 15 min.</span><span class="badge easy">Easy</span><span
+                                    class="badge tag">Linked List</span></div>
+                        </div>
+                        <div class="dsa-card">
+                            <div class="dsa-card-title">Maximum Subarray</div>
+                            <div class="dsa-meta"><span>⏱ 30 min.</span><span class="badge med">Medium</span><span
+                                    class="badge tag">Dynamic Programming</span></div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- ═══ 4: ACE INTERVIEWS ═══ -->
+                <div class="ey-item">
+                    <div class="ey-item-label">Ace Interviews with Shared Experiences</div>
+                    <div class="ey-item-title">Read verified interview stories</div>
+                    <div class="ey-item-desc">Read verified stories from real candidates. Learn what to expect in
+                        interviews, common questions, and proven strategies to perform your best.</div>
+                    <div class="rounds-panel" id="roundsPanel">
+                        <div class="round-row" id="rr0">
+                            <div class="rnum">1</div>
+                            <div class="round-main">
+                                <div style="display:flex;align-items:center;gap:8px;">
+                                    <div class="rname">Online Assessment</div>
+                                    <div class="rmeta"><span class="badge med">Medium</span><span
+                                            style="font-size:11px;color:var(--gray2);">⏱ 60m · Remote · ◇ 2
+                                            problems</span></div>
+                                </div>
+                                <div class="round-detail">
+                                    <div class="round-detail-text">Two algorithmic problems tested on HackerRank. Focus
+                                        on arrays and string manipulation. Time limit was strict — practice speed.</div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="round-row" id="rr1">
+                            <div class="rnum">2</div>
+                            <div class="round-main">
+                                <div style="display:flex;align-items:center;gap:8px;">
+                                    <div class="rname">DSA</div>
+                                    <div class="rmeta"><span class="badge med">Medium</span><span
+                                            style="font-size:11px;color:var(--gray2);">⏱ 60m · Remote · ◇ 2
+                                            problems</span></div>
+                                </div>
+                                <div class="round-detail">
+                                    <div class="round-detail-text">Live coding round with an interviewer. Asked Binary
+                                        Search and Graph BFS problems. Interviewers hint if stuck.</div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="round-row hl" id="rr2">
+                            <div class="rnum">3</div>
+                            <div class="round-main">
+                                <div style="display:flex;align-items:center;gap:8px;">
+                                    <div class="rname">System Design</div>
+                                    <div class="rmeta"><span class="badge hard">Hard</span><span
+                                            style="font-size:11px;color:var(--gray2);">⏱ 45m · Remote · ⬡
+                                            Architecture</span></div>
+                                </div>
+                                <div class="round-detail">
+                                    <div class="round-detail-text">This round tested my ability to design scalable
+                                        systems. The interviewer asked me to design a distributed system for handling
+                                        high traffic loads. I discussed load balancing, caching strategies, and
+                                        microservices architecture.</div>
+                                    <div class="round-questions">
+                                        <div class="round-q-label">Questions</div>
+                                        <div class="round-q-item"><span style="color:var(--orange)">[+]</span> Design a
+                                            URL Shortener <span class="solve">Solve</span></div>
+                                        <div class="round-q-item"><span style="color:var(--orange)">[+]</span> Design a
+                                            Distributed Cache System <span class="solve">Solve</span></div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="round-row" id="rr3">
+                            <div class="rnum">4</div>
+                            <div class="round-main">
+                                <div style="display:flex;align-items:center;gap:8px;">
+                                    <div class="rname">HR Round</div>
+                                    <div class="rmeta"><span class="badge easy">Easy</span><span
+                                            style="font-size:11px;color:var(--gray2);">⏱ 30m · Remote · ☑
+                                            Behavioral</span></div>
+                                </div>
+                                <div class="round-detail">
+                                    <div class="round-detail-text">Standard behavioral round. Prepare STAR format
+                                        answers for leadership, conflict, and failure questions.</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div><!-- /ey-grid -->
+
+            <!-- Features Row -->
+            <div class="features-row">
+                <div class="feature-card fade-up">
+                    <div class="feature-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                            stroke-width="2">
+                            <path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2" />
+                            <circle cx="9" cy="7" r="4" />
+                            <path d="M23 21v-2a4 4 0 00-3-3.87" />
+                            <path d="M16 3.13a4 4 0 010 7.75" />
+                        </svg></div>
+                    <div class="feature-title">Community Support</div>
+                    <div class="feature-desc">Join 1.2M+ coders worldwide, share progress, ask questions, and accelerate
+                        learning through an active, supportive global network.</div>
+                </div>
+                <div class="feature-card fade-up">
+                    <div class="feature-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                            stroke-width="2">
+                            <rect x="3" y="4" width="18" height="18" rx="2" />
+                            <line x1="16" y1="2" x2="16" y2="6" />
+                            <line x1="8" y1="2" x2="8" y2="6" />
+                            <line x1="3" y1="10" x2="21" y2="10" />
+                        </svg></div>
+                    <div class="feature-title">Biweekly Sessions</div>
+                    <div class="feature-desc">Attend live sessions every two weeks, interact with experts, receive
+                        personalized feedback, and strengthen coding and interview preparation.</div>
+                </div>
+                <div class="feature-card fade-up">
+                    <div class="feature-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                            stroke-width="2">
+                            <path d="M22 11.08V12a10 10 0 11-5.93-9.14" />
+                            <polyline points="22 4 12 14.01 9 11.01" />
+                        </svg></div>
+                    <div class="feature-title">Mock Tests & Contests</div>
+                    <div class="feature-desc">Sharpen your speed, accuracy, and problem-solving stamina by competing in
+                        realistic, high-pressure scenarios that prepare you for assessments.</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- TESTIMONIALS -->
+    <section class="section testimonials-section" id="testimonials">
+        <div class="section-center">
+            <div
+                style="display:flex;justify-content:space-between;align-items:flex-start;flex-wrap:wrap;gap:16px;margin-bottom:50px;">
+                <h2 class="testimonials-title fade-up"><span>Coders that<br></span>turned around<br>their careers</h2>
+                <div class="learner-count fade-up">14,88,801+ Learners!</div>
+            </div>
+        </div>
+        <!-- MARQUEE ROW 1: left → right -->
+        <div class="marquee-wrap">
+            <div class="marquee-track marquee-ltr">
+                <div class="testimonial-card">
+                    <div class="t-header">
+                        <div class="t-avatar" style="background:linear-gradient(135deg,#6366f1,#8b5cf6)">ST</div>
+                        <div>
+                            <div class="t-name">Shubham Tandon</div>
+                        </div>
+                        <div class="li-icon"><svg viewBox="0 0 24 24">
+                                <path
+                                    d="M16 8a6 6 0 016 6v7h-4v-7a2 2 0 00-2-2 2 2 0 00-2 2v7h-4v-7a6 6 0 016-6zM2 9h4v12H2z" />
+                                <circle cx="4" cy="4" r="2" />
+                            </svg></div>
+                    </div>
+                    <div class="t-text">Hey Striver, I just wanted to send a huge thank you for your amazing A2Z DSA
+                        sheet. It was the most important resource in my preparation and helped me crack my on campus
+                        interviews.</div>
+                    <div class="t-footer">
+                        <div class="t-company-logo" style="background:#e31837;">O</div>
+                        <div>
+                            <div class="t-role">Full Stack Engineer Intern</div>
+                            <div class="t-company">Optum</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="testimonial-card">
+                    <div class="t-header">
+                        <div class="t-avatar" style="background:linear-gradient(135deg,#f97316,#fbbf24)">RS</div>
+                        <div>
+                            <div class="t-name">Rohit Sharma</div>
+                        </div>
+                        <div class="li-icon"><svg viewBox="0 0 24 24">
+                                <path
+                                    d="M16 8a6 6 0 016 6v7h-4v-7a2 2 0 00-2-2 2 2 0 00-2 2v7h-4v-7a6 6 0 016-6zM2 9h4v12H2z" />
+                                <circle cx="4" cy="4" r="2" />
+                            </svg></div>
+                    </div>
+                    <div class="t-text">Getting selected as an SDE Intern at Amazon has been one of the biggest
+                        milestones. Fundamentals+ and Striver gave me the consistency and direction I needed to finally break in.
+                    </div>
+                    <div class="t-footer">
+                        <div class="t-company-logo" style="background:#ff9900;">A</div>
+                        <div>
+                            <div class="t-role">SDE 1 Intern</div>
+                            <div class="t-company">Amazon</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="testimonial-card">
+                    <div class="t-header">
+                        <div class="t-avatar" style="background:linear-gradient(135deg,#10b981,#059669)">AJ</div>
+                        <div>
+                            <div class="t-name">Anusha Jha</div>
+                        </div>
+                        <div class="li-icon"><svg viewBox="0 0 24 24">
+                                <path
+                                    d="M16 8a6 6 0 016 6v7h-4v-7a2 2 0 00-2-2 2 2 0 00-2 2v7h-4v-7a6 6 0 016-6zM2 9h4v12H2z" />
+                                <circle cx="4" cy="4" r="2" />
+                            </svg></div>
+                    </div>
+                    <div class="t-text">Despite being heavily involved in extracurricular activities as General
+                        Secretary, Fundamentals+ structured roadmap helped me stay consistent and break into my dream company.
+                    </div>
+                    <div class="t-footer">
+                        <div class="t-company-logo" style="background:#0078d4;">D</div>
+                        <div>
+                            <div class="t-role">ADMM Analyst</div>
+                            <div class="t-company">Deloitte</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="testimonial-card">
+                    <div class="t-header">
+                        <div class="t-avatar" style="background:linear-gradient(135deg,#ec4899,#f43f5e)">AS</div>
+                        <div>
+                            <div class="t-name">Abilaash S. S</div>
+                        </div>
+                        <div class="li-icon"><svg viewBox="0 0 24 24">
+                                <path
+                                    d="M16 8a6 6 0 016 6v7h-4v-7a2 2 0 00-2-2 2 2 0 00-2 2v7h-4v-7a6 6 0 016-6zM2 9h4v12H2z" />
+                                <circle cx="4" cy="4" r="2" />
+                            </svg></div>
+                    </div>
+                    <div class="t-text">I started with almost zero confidence in competitive programming, but the
+                        structured A2Z sheet and Striver's clear explanations changed everything for me in just 3
+                        months.</div>
+                    <div class="t-footer">
+                        <div class="t-company-logo" style="background:#00d4aa;">Z</div>
+                        <div>
+                            <div class="t-role">Software Engineer</div>
+                            <div class="t-company">Zoho</div>
+                        </div>
+                    </div>
+                </div>
+                <!-- Duplicates for seamless loop -->
+                <div class="testimonial-card">
+                    <div class="t-header">
+                        <div class="t-avatar" style="background:linear-gradient(135deg,#6366f1,#8b5cf6)">ST</div>
+                        <div>
+                            <div class="t-name">Shubham Tandon</div>
+                        </div>
+                        <div class="li-icon"><svg viewBox="0 0 24 24">
+                                <path
+                                    d="M16 8a6 6 0 016 6v7h-4v-7a2 2 0 00-2-2 2 2 0 00-2 2v7h-4v-7a6 6 0 016-6zM2 9h4v12H2z" />
+                                <circle cx="4" cy="4" r="2" />
+                            </svg></div>
+                    </div>
+                    <div class="t-text">Hey Striver, I just wanted to send a huge thank you for your amazing A2Z DSA
+                        sheet. It was the most important resource in my preparation and helped me crack my on campus
+                        interviews.</div>
+                    <div class="t-footer">
+                        <div class="t-company-logo" style="background:#e31837;">O</div>
+                        <div>
+                            <div class="t-role">Full Stack Engineer Intern</div>
+                            <div class="t-company">Optum</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="testimonial-card">
+                    <div class="t-header">
+                        <div class="t-avatar" style="background:linear-gradient(135deg,#f97316,#fbbf24)">RS</div>
+                        <div>
+                            <div class="t-name">Rohit Sharma</div>
+                        </div>
+                        <div class="li-icon"><svg viewBox="0 0 24 24">
+                                <path
+                                    d="M16 8a6 6 0 016 6v7h-4v-7a2 2 0 00-2-2 2 2 0 00-2 2v7h-4v-7a6 6 0 016-6zM2 9h4v12H2z" />
+                                <circle cx="4" cy="4" r="2" />
+                            </svg></div>
+                    </div>
+                    <div class="t-text">Getting selected as an SDE Intern at Amazon has been one of the biggest
+                        milestones. Fundamentals+ and Striver gave me the consistency and direction I needed to finally break in.
+                    </div>
+                    <div class="t-footer">
+                        <div class="t-company-logo" style="background:#ff9900;">A</div>
+                        <div>
+                            <div class="t-role">SDE 1 Intern</div>
+                            <div class="t-company">Amazon</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="testimonial-card">
+                    <div class="t-header">
+                        <div class="t-avatar" style="background:linear-gradient(135deg,#10b981,#059669)">AJ</div>
+                        <div>
+                            <div class="t-name">Anusha Jha</div>
+                        </div>
+                        <div class="li-icon"><svg viewBox="0 0 24 24">
+                                <path
+                                    d="M16 8a6 6 0 016 6v7h-4v-7a2 2 0 00-2-2 2 2 0 00-2 2v7h-4v-7a6 6 0 016-6zM2 9h4v12H2z" />
+                                <circle cx="4" cy="4" r="2" />
+                            </svg></div>
+                    </div>
+                    <div class="t-text">Despite being heavily involved in extracurricular activities as General
+                        Secretary, Fundamentals+ structured roadmap helped me stay consistent and break into my dream company.
+                    </div>
+                    <div class="t-footer">
+                        <div class="t-company-logo" style="background:#0078d4;">D</div>
+                        <div>
+                            <div class="t-role">ADMM Analyst</div>
+                            <div class="t-company">Deloitte</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="testimonial-card">
+                    <div class="t-header">
+                        <div class="t-avatar" style="background:linear-gradient(135deg,#ec4899,#f43f5e)">AS</div>
+                        <div>
+                            <div class="t-name">Abilaash S. S</div>
+                        </div>
+                        <div class="li-icon"><svg viewBox="0 0 24 24">
+                                <path
+                                    d="M16 8a6 6 0 016 6v7h-4v-7a2 2 0 00-2-2 2 2 0 00-2 2v7h-4v-7a6 6 0 016-6zM2 9h4v12H2z" />
+                                <circle cx="4" cy="4" r="2" />
+                            </svg></div>
+                    </div>
+                    <div class="t-text">I started with almost zero confidence in competitive programming, but the
+                        structured A2Z sheet and Striver's clear explanations changed everything for me in just 3
+                        months.</div>
+                    <div class="t-footer">
+                        <div class="t-company-logo" style="background:#00d4aa;">Z</div>
+                        <div>
+                            <div class="t-role">Software Engineer</div>
+                            <div class="t-company">Zoho</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="marquee-fade-left"></div>
+            <div class="marquee-fade-right"></div>
+        </div>
+
+        <!-- MARQUEE ROW 2: right → left -->
+        <div class="marquee-wrap" style="margin-top:20px;">
+            <div class="marquee-track marquee-rtl">
+                <div class="testimonial-card">
+                    <div class="t-header">
+                        <div class="t-avatar" style="background:linear-gradient(135deg,#3b82f6,#1d4ed8)">PM</div>
+                        <div>
+                            <div class="t-name">Prateek Malhotra</div>
+                        </div>
+                        <div class="li-icon"><svg viewBox="0 0 24 24">
+                                <path
+                                    d="M16 8a6 6 0 016 6v7h-4v-7a2 2 0 00-2-2 2 2 0 00-2 2v7h-4v-7a6 6 0 016-6zM2 9h4v12H2z" />
+                                <circle cx="4" cy="4" r="2" />
+                            </svg></div>
+                    </div>
+                    <div class="t-text">The company-specific preparation feature is a game changer. Knew exactly what
+                        Amazon asks. Cleared all 4 rounds with confidence and got the offer letter within a week.</div>
+                    <div class="t-footer">
+                        <div class="t-company-logo" style="background:#ff9900;">A</div>
+                        <div>
+                            <div class="t-role">SDE 2</div>
+                            <div class="t-company">Amazon</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="testimonial-card">
+                    <div class="t-header">
+                        <div class="t-avatar" style="background:linear-gradient(135deg,#f59e0b,#d97706)">SK</div>
+                        <div>
+                            <div class="t-name">Satyam Kumar</div>
+                        </div>
+                        <div class="li-icon"><svg viewBox="0 0 24 24">
+                                <path
+                                    d="M16 8a6 6 0 016 6v7h-4v-7a2 2 0 00-2-2 2 2 0 00-2 2v7h-4v-7a6 6 0 016-6zM2 9h4v12H2z" />
+                                <circle cx="4" cy="4" r="2" />
+                            </svg></div>
+                    </div>
+                    <div class="t-text">The biweekly live sessions made a huge difference. Direct interaction with
+                        experts helped me understand where I was going wrong in system design. Cracked Google on the
+                        second attempt.</div>
+                    <div class="t-footer">
+                        <div class="t-company-logo" style="background:#4285f4;">G</div>
+                        <div>
+                            <div class="t-role">Software Engineer L4</div>
+                            <div class="t-company">Google</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="testimonial-card">
+                    <div class="t-header">
+                        <div class="t-avatar" style="background:linear-gradient(135deg,#8b5cf6,#6d28d9)">VK</div>
+                        <div>
+                            <div class="t-name">Vikram Kumar</div>
+                        </div>
+                        <div class="li-icon"><svg viewBox="0 0 24 24">
+                                <path
+                                    d="M16 8a6 6 0 016 6v7h-4v-7a2 2 0 00-2-2 2 2 0 00-2 2v7h-4v-7a6 6 0 016-6zM2 9h4v12H2z" />
+                                <circle cx="4" cy="4" r="2" />
+                            </svg></div>
+                    </div>
+                    <div class="t-text">Fundamentals+ helped me transition from a service-based company to a product company. The
+                        mock tests especially helped me improve my speed and accuracy under pressure.</div>
+                    <div class="t-footer">
+                        <div class="t-company-logo" style="background:#0052cc;">M</div>
+                        <div>
+                            <div class="t-role">Software Engineer</div>
+                            <div class="t-company">Microsoft</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="testimonial-card">
+                    <div class="t-header">
+                        <div class="t-avatar" style="background:linear-gradient(135deg,#22c55e,#16a34a)">NP</div>
+                        <div>
+                            <div class="t-name">Nikhil Patel</div>
+                        </div>
+                        <div class="li-icon"><svg viewBox="0 0 24 24">
+                                <path
+                                    d="M16 8a6 6 0 016 6v7h-4v-7a2 2 0 00-2-2 2 2 0 00-2 2v7h-4v-7a6 6 0 016-6zM2 9h4v12H2z" />
+                                <circle cx="4" cy="4" r="2" />
+                            </svg></div>
+                    </div>
+                    <div class="t-text">The personalized roadmap feature changed how I study. No more random grinding —
+                        just a clear path from basics to advanced. Placed in Flipkart within 4 months of joining Fundamentals+.
+                    </div>
+                    <div class="t-footer">
+                        <div class="t-company-logo" style="background:#F7941D;">F</div>
+                        <div>
+                            <div class="t-role">SDE 1</div>
+                            <div class="t-company">Flipkart</div>
+                        </div>
+                    </div>
+                </div>
+                <!-- Duplicates -->
+                <div class="testimonial-card">
+                    <div class="t-header">
+                        <div class="t-avatar" style="background:linear-gradient(135deg,#3b82f6,#1d4ed8)">PM</div>
+                        <div>
+                            <div class="t-name">Prateek Malhotra</div>
+                        </div>
+                        <div class="li-icon"><svg viewBox="0 0 24 24">
+                                <path
+                                    d="M16 8a6 6 0 016 6v7h-4v-7a2 2 0 00-2-2 2 2 0 00-2 2v7h-4v-7a6 6 0 016-6zM2 9h4v12H2z" />
+                                <circle cx="4" cy="4" r="2" />
+                            </svg></div>
+                    </div>
+                    <div class="t-text">The company-specific preparation feature is a game changer. Knew exactly what
+                        Amazon asks. Cleared all 4 rounds with confidence and got the offer letter within a week.</div>
+                    <div class="t-footer">
+                        <div class="t-company-logo" style="background:#ff9900;">A</div>
+                        <div>
+                            <div class="t-role">SDE 2</div>
+                            <div class="t-company">Amazon</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="testimonial-card">
+                    <div class="t-header">
+                        <div class="t-avatar" style="background:linear-gradient(135deg,#f59e0b,#d97706)">SK</div>
+                        <div>
+                            <div class="t-name">Satyam Kumar</div>
+                        </div>
+                        <div class="li-icon"><svg viewBox="0 0 24 24">
+                                <path
+                                    d="M16 8a6 6 0 016 6v7h-4v-7a2 2 0 00-2-2 2 2 0 00-2 2v7h-4v-7a6 6 0 016-6zM2 9h4v12H2z" />
+                                <circle cx="4" cy="4" r="2" />
+                            </svg></div>
+                    </div>
+                    <div class="t-text">The biweekly live sessions made a huge difference. Direct interaction with
+                        experts helped me understand where I was going wrong in system design. Cracked Google on the
+                        second attempt.</div>
+                    <div class="t-footer">
+                        <div class="t-company-logo" style="background:#4285f4;">G</div>
+                        <div>
+                            <div class="t-role">Software Engineer L4</div>
+                            <div class="t-company">Google</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="testimonial-card">
+                    <div class="t-header">
+                        <div class="t-avatar" style="background:linear-gradient(135deg,#8b5cf6,#6d28d9)">VK</div>
+                        <div>
+                            <div class="t-name">Vikram Kumar</div>
+                        </div>
+                        <div class="li-icon"><svg viewBox="0 0 24 24">
+                                <path
+                                    d="M16 8a6 6 0 016 6v7h-4v-7a2 2 0 00-2-2 2 2 0 00-2 2v7h-4v-7a6 6 0 016-6zM2 9h4v12H2z" />
+                                <circle cx="4" cy="4" r="2" />
+                            </svg></div>
+                    </div>
+                    <div class="t-text">Fundamentals+ helped me transition from a service-based company to a product company. The
+                        mock tests especially helped me improve my speed and accuracy under pressure.</div>
+                    <div class="t-footer">
+                        <div class="t-company-logo" style="background:#0052cc;">M</div>
+                        <div>
+                            <div class="t-role">Software Engineer</div>
+                            <div class="t-company">Microsoft</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="testimonial-card">
+                    <div class="t-header">
+                        <div class="t-avatar" style="background:linear-gradient(135deg,#22c55e,#16a34a)">NP</div>
+                        <div>
+                            <div class="t-name">Nikhil Patel</div>
+                        </div>
+                        <div class="li-icon"><svg viewBox="0 0 24 24">
+                                <path
+                                    d="M16 8a6 6 0 016 6v7h-4v-7a2 2 0 00-2-2 2 2 0 00-2 2v7h-4v-7a6 6 0 016-6zM2 9h4v12H2z" />
+                                <circle cx="4" cy="4" r="2" />
+                            </svg></div>
+                    </div>
+                    <div class="t-text">The personalized roadmap feature changed how I study. No more random grinding —
+                        just a clear path from basics to advanced. Placed in Flipkart within 4 months of joining Fundamentals+.
+                    </div>
+                    <div class="t-footer">
+                        <div class="t-company-logo" style="background:#F7941D;">F</div>
+                        <div>
+                            <div class="t-role">SDE 1</div>
+                            <div class="t-company">Flipkart</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="marquee-fade-left"></div>
+            <div class="marquee-fade-right"></div>
+        </div>
+    </section>
+
+    <!-- PRICING -->
+    <section class="section" id="pricing" style="background:var(--bg);">
+        <div class="section-center">
+            <div
+                style="display:inline-flex;align-items:center;justify-content:center;width:52px;height:52px;background:rgba(34,197,94,.15);border-radius:14px;margin-bottom:20px;">
+                <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="#22c55e" stroke-width="2">
+                    <path d="M9 14c0 1.1.9 2 2 2h2a2 2 0 000-4h-2a2 2 0 01-2-2 2 2 0 012-2h2a2 2 0 012 2" />
+                    <line x1="12" y1="6" x2="12" y2="8" />
+                    <line x1="12" y1="16" x2="12" y2="18" />
+                    <circle cx="12" cy="12" r="10" />
+                </svg>
+            </div>
+            <h2 class="ey-title" style="margin-bottom:8px;">Affordable Plans<br><span class="dim">for Everyone</span>
+            </h2>
+            <p style="font-size:15px;color:var(--gray1);margin-bottom:56px;">Choose a plan that fits your prep timeline
+                and goals.</p>
+
+            <!-- Main plans: Sprint + Pinnacle side-by-side -->
+            <div
+                style="display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:20px;margin-bottom:40px;">
+
+                <!-- SPRINT -->
+                <div class="pricing-card">
+                    <div style="font-size:28px;margin-bottom:4px;">🏃</div>
+                    <div style="display:flex;align-items:center;gap:10px;margin-bottom:6px;">
+                        <span style="font-size:22px;font-weight:800;">Sprint</span>
+                        <span style="font-size:13px;color:#22c55e;font-weight:600;">(12K+ Learners)</span>
+                    </div>
+                    <p style="font-size:13px;color:var(--gray1);margin-bottom:20px;">Complete placement preparation</p>
+                    <div class="price-tabs">
+                        <button class="price-tab active">12 Months</button>
+                        <button class="price-tab">48 Months</button>
+                    </div>
+                    <div style="margin:20px 0 8px;">
+                        <span style="font-size:15px;color:var(--gray2);text-decoration:line-through;">₹5,899.00</span>
+                        <span style="font-size:13px;color:var(--gray2);margin-left:8px;">⏱ 01H : 51M : 25S</span>
+                    </div>
+                    <div style="font-size:34px;font-weight:800;margin-bottom:20px;">₹2,949<span
+                            style="font-size:16px;">.00</span></div>
+                    <ul class="plan-features">
+                        <li><span class="check">✓</span>DSA (Basics to Advanced)</li>
+                        <li><span class="check">✓</span>Core CS Subjects</li>
+                        <li><span class="check">✓</span>System Design Basics</li>
+                        <li><span class="check">✓</span>AI Features</li>
+                        <li><span class="check">✓</span>Career Guidance Sessions</li>
+                        <li><span class="cross">✗</span>Premium/Company Problems</li>
+                    </ul>
+                    <a href="#" class="pricing-cta">Upgrade Now →</a>
+                </div>
+
+                <!-- PINNACLE (Most Popular) -->
+                <div class="pricing-card pricing-popular">
+                    <div class="popular-bar">🎉 Most Popular</div>
+                    <div style="font-size:28px;margin-bottom:4px;">🏔️</div>
+                    <div style="display:flex;align-items:center;gap:10px;margin-bottom:6px;">
+                        <span style="font-size:22px;font-weight:800;">Pinnacle</span>
+                        <span style="font-size:13px;color:#22c55e;font-weight:600;">(47K+ Learners)</span>
+                    </div>
+                    <p style="font-size:13px;color:var(--gray1);margin-bottom:20px;">Complete placement preparation</p>
+                    <div class="price-tabs">
+                        <button class="price-tab active">12 Months</button>
+                        <button class="price-tab">24 Months</button>
+                        <button class="price-tab" style="position:relative;">48 Months<span
+                                style="position:absolute;top:-10px;left:50%;transform:translateX(-50%);background:var(--orange);color:white;font-size:9px;font-weight:700;padding:2px 5px;border-radius:4px;white-space:nowrap;">BEST
+                                VALUE</span></button>
+                        <button class="price-tab">Lifetime</button>
+                    </div>
+                    <div style="margin:20px 0 8px;">
+                        <span style="font-size:15px;color:var(--gray2);text-decoration:line-through;">₹9,999.00</span>
+                        <span style="font-size:13px;color:var(--gray2);margin-left:8px;">⏱ 01H : 51M : 25S</span>
+                    </div>
+                    <div style="font-size:34px;font-weight:800;margin-bottom:20px;">₹4,999<span
+                            style="font-size:16px;">.00</span></div>
+                    <ul class="plan-features">
+                        <li><span class="check">✓</span>Everything in Sprint</li>
+                        <li><span class="check">✓</span>Premium/Company Problems</li>
+                        <li><span class="check">✓</span>Expert Feedback Sessions</li>
+                        <li><span class="check">✓</span>Mock Interviews</li>
+                        <li><span class="check">✓</span>AI-Powered Roadmap</li>
+                        <li><span class="check">✓</span>Priority Support</li>
+                    </ul>
+                    <a href="#" class="pricing-cta" style="background:var(--orange);color:white;">Upgrade Now →</a>
+                </div>
+            </div>
+
+            <!-- Explore More Plans -->
+            <div
+                style="display:inline-flex;align-items:center;justify-content:center;width:52px;height:52px;background:rgba(139,92,246,.15);border-radius:14px;margin-bottom:20px;">
+                <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="#8b5cf6" stroke-width="2">
+                    <path
+                        d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z" />
+                </svg>
+            </div>
+            <h2 class="ey-title" style="margin-bottom:8px;">Explore More Plans<br><span class="dim">Tailored to Your
+                    Needs</span></h2>
+            <p style="font-size:15px;color:var(--gray1);margin-bottom:40px;">Subject-specific plans to sharpen exactly
+                what you need.</p>
+
+            <div class="price-grid">
+                <!-- DSA -->
+                <div class="pricing-card pricing-mini">
+                    <div style="font-size:20px;font-weight:800;margin-bottom:4px;">DSA</div>
+                    <div style="font-size:13px;color:#22c55e;margin-bottom:16px;">(7K+ Learners)</div>
+                    <div style="border-top:1px solid var(--border);padding-top:16px;">
+                        <div style="font-size:14px;color:var(--gray2);text-decoration:line-through;margin-bottom:4px;">
+                            ₹5,099.00</div>
+                        <div style="display:flex;align-items:center;gap:10px;margin-bottom:6px;"><span
+                                style="font-size:26px;font-weight:800;">₹2,804<span
+                                    style="font-size:13px;">.00</span></span><span
+                                style="background:rgba(239,68,68,.15);color:#ef4444;font-size:11px;font-weight:700;padding:3px 7px;border-radius:5px;">🔥
+                                45% OFF</span></div>
+                        <div style="font-size:12px;color:var(--gray2);margin-bottom:16px;">📅 12 Months</div>
+                    </div>
+                    <ul class="plan-features plan-features-sm">
+                        <li><span class="check">✓</span>DSA (Basics to Advanced)</li>
+                        <li><span class="check">✓</span>DSA Revision Pattern Sheet</li>
+                        <li><span class="check">✓</span>AI Features</li>
+                        <li><span class="check">✓</span>Career Guidance Sessions</li>
+                        <li><span class="cross">✗</span>Premium/Company Problems</li>
+                    </ul>
+                    <a href="#" class="pricing-cta">Upgrade Now →</a>
+                </div>
+                <!-- LLD -->
+                <div class="pricing-card pricing-mini">
+                    <div style="font-size:20px;font-weight:800;margin-bottom:4px;">LLD</div>
+                    <div style="font-size:13px;color:#22c55e;margin-bottom:16px;">(13K+ Learners)</div>
+                    <div style="border-top:1px solid var(--border);padding-top:16px;">
+                        <div style="font-size:14px;color:var(--gray2);text-decoration:line-through;margin-bottom:4px;">
+                            ₹4,998.00</div>
+                        <div style="display:flex;align-items:center;gap:10px;margin-bottom:6px;"><span
+                                style="font-size:26px;font-weight:800;">₹2,749<span
+                                    style="font-size:13px;">.00</span></span><span
+                                style="background:rgba(239,68,68,.15);color:#ef4444;font-size:11px;font-weight:700;padding:3px 7px;border-radius:5px;">🔥
+                                45% OFF</span></div>
+                        <div style="font-size:12px;color:var(--gray2);margin-bottom:16px;">📅 12 Months</div>
+                    </div>
+                    <ul class="plan-features plan-features-sm">
+                        <li><span class="check">✓</span>OOPs (Learning + Practice)</li>
+                        <li><span class="check">✓</span>Low Level Design</li>
+                        <li><span class="check">✓</span>AI Features</li>
+                        <li><span class="check">✓</span>Career Guidance Sessions</li>
+                        <li><span class="cross">✗</span>Premium/Company Problems</li>
+                    </ul>
+                    <a href="#" class="pricing-cta">Upgrade Now →</a>
+                </div>
+                <!-- OOPs + LLD + SQL -->
+                <div class="pricing-card pricing-mini">
+                    <div style="font-size:20px;font-weight:800;margin-bottom:4px;">OOPs + LLD + SQL</div>
+                    <div style="font-size:13px;color:#22c55e;margin-bottom:16px;">(13K+ Learners)</div>
+                    <div style="border-top:1px solid var(--border);padding-top:16px;">
+                        <div style="font-size:14px;color:var(--gray2);text-decoration:line-through;margin-bottom:4px;">
+                            ₹6,650.00</div>
+                        <div style="display:flex;align-items:center;gap:10px;margin-bottom:6px;"><span
+                                style="font-size:26px;font-weight:800;">₹3,658<span
+                                    style="font-size:13px;">.00</span></span><span
+                                style="background:rgba(239,68,68,.15);color:#ef4444;font-size:11px;font-weight:700;padding:3px 7px;border-radius:5px;">🔥
+                                45% OFF</span></div>
+                        <div style="font-size:12px;color:var(--gray2);margin-bottom:16px;">📅 12 Months</div>
+                    </div>
+                    <ul class="plan-features plan-features-sm">
+                        <li><span class="check">✓</span>OOPs (Learning + Practice)</li>
+                        <li><span class="check">✓</span>Low Level Design + SQL</li>
+                        <li><span class="check">✓</span>AI Features</li>
+                        <li><span class="check">✓</span>Career Guidance Sessions</li>
+                        <li><span class="cross">✗</span>Premium/Company Problems</li>
+                    </ul>
+                    <a href="#" class="pricing-cta">Upgrade Now →</a>
+                </div>
+            </div>
+
+            <!-- Contact Banner -->
+            <div class="contact-banner">
+                <div>
+                    <div style="font-size:20px;font-weight:700;margin-bottom:8px;">Got any doubts or interested in a
+                        plan?</div>
+                    <p style="font-size:14px;color:var(--gray1);max-width:500px;line-height:1.6;">We're just a message
+                        away! Whether you're unsure which plan suits you or want to know more, we're here to help.</p>
+                </div>
+                <div style="display:flex;flex-direction:column;gap:12px;flex-shrink:0;">
+                    <button class="contact-btn"><svg width="18" height="18" viewBox="0 0 24 24" fill="none"
+                            stroke="currentColor" stroke-width="2">
+                            <path
+                                d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 013.07 9.81 19.79 19.79 0 01.56 4.18 2 2 0 012.53 2h3a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L6.91 9.91a16 16 0 006.18 6.18l.88-.88a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0122 16.92z" />
+                        </svg> Request for Callback</button>
+                    <button class="contact-btn contact-btn-wa"><svg width="18" height="18" viewBox="0 0 24 24"
+                            fill="currentColor">
+                            <path
+                                d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z" />
+                        </svg> Message on Whatsapp</button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- FAQ -->
+    <section class="section" id="faq" style="background:var(--bg2);">
+        <div class="section-center">
+            <h2 class="ey-title" style="margin-bottom:56px;">Frequently Asked<br>Questions</h2>
+            <div class="faq-layout">
+                <!-- Category pills sidebar -->
+                <div class="faq-cats" id="faqCats">
+                    <button class="faq-cat active" data-cat="subscription">Subscription &amp; Future Updates</button>
+                    <button class="faq-cat" data-cat="features">Features &amp; Functionality</button>
+                    <button class="faq-cat" data-cat="curriculum">Course Content &amp; Curriculum</button>
+                    <button class="faq-cat" data-cat="account">Account Management</button>
+                    <button class="faq-cat" data-cat="access">Course Access &amp; Technical Support</button>
+                    <button class="faq-cat" data-cat="mentorship">Mentorship &amp; Community Support</button>
+                    <button class="faq-cat" data-cat="certification">Certification</button>
+                    <button class="faq-cat" data-cat="career">Career Guidance</button>
+                    <button class="faq-cat" data-cat="internships">Internships &amp; Job Assistance</button>
+                    <button class="faq-cat" data-cat="payment">Payment &amp; Refunds</button>
+                </div>
+                <!-- FAQ accordion panel -->
+                <div class="faq-panel" id="faqPanel">
+                    <!-- Items rendered by JS based on active cat -->
+                </div>
+            </div>
+        </div>
+    </section>
+    <footer>
+        <div class="footer-logo">
+            <div class="logo-icon">        <svg viewBox="0 0 24 24" fill="white">
+            <!-- Row 1: 3 dots -->
+            <circle cx="5" cy="5" r="2"></circle>
+            <circle cx="12" cy="5" r="2"></circle>
+            <circle cx="19" cy="5" r="2"></circle>
+
+            <!-- Row 2: 2 dots (left aligned) -->
+            <circle cx="5" cy="12" r="2"></circle>
+            <circle cx="12" cy="12" r="2"></circle>
+
+            <!-- Row 3: 1 dot (left aligned) -->
+            <circle cx="5" cy="19" r="2"></circle>
+        </svg></div><span style="font-weight:700;font-size:17px;">Fundamentals</span>
+        </div>
+        <p class="footer-desc">The ONE STOP Learning Platform for TECH Interviews. Learn DSA, System Design, and Core CS
+            Subjects.</p>
+        <div class="footer-links"><a href="#">Home</a><a href="#">Plus Dashboard</a><a href="#">Pricing</a><a
+                href="#">Blog</a><a href="#">Privacy Policy</a><a href="#">Terms of Service</a></div>
+        <div class="footer-bottom">© 2026 Fundamentals All rights reserved.</div>
+    </footer>
+
+    <script>
+        // ════════════════════════════════════════
+        // FADE-UP ON SCROLL — fixed: elements start hidden, 
+        // only become visible when scrolled into view
+        // ════════════════════════════════════════
+
+        // let learn_free = document.getElementById('learn_free')
+        // let explore_plus = document.getElementById('explore_plus')
+
+        // learn_free.addEventListener('click',()=>{
+        //     window.location.href = 'free.html'
+        // })
+
+        // explore_plus.addEventListener('click',()=>{
+        //     window.location.href = 'dashboard.html'
+        // })
+
+        (function () {
+            const fadeEls = document.querySelectorAll('.fade-up');
+            // rootMargin negative so element must be 10% into viewport
+            const io = new IntersectionObserver(entries => {
+                entries.forEach(el => {
+                    if (el.isIntersecting) {
+                        el.target.classList.add('visible');
+                        io.unobserve(el.target);
+                    }
+                });
+            }, { threshold: 0.08, rootMargin: '0px 0px -60px 0px' });
+            fadeEls.forEach(el => io.observe(el));
+        })();
+
+        // ════════════════════════════════════════
+        // THEME TOGGLE — fully working dark/light
+        // ════════════════════════════════════════
+const themeBtn = document.querySelector('.theme-btn');
+const sunSVG = `<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/></svg>`;
+const moonSVG = `<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 12.79A9 9 0 1111.21 3 7 7 0 0021 12.79z"/></svg>`;
+var CF_THEME_KEY = 'cf_theme';
+var isDark = localStorage.getItem(CF_THEME_KEY) !== 'light';
+
+// Apply saved theme on page load
+document.body.classList.toggle('light', !isDark);
+themeBtn.innerHTML = isDark ? sunSVG : moonSVG;
+
+themeBtn.addEventListener('click', () => {
+    isDark = !isDark;
+    document.body.classList.toggle('light', !isDark);
+    themeBtn.innerHTML = isDark ? sunSVG : moonSVG;
+    localStorage.setItem(CF_THEME_KEY, isDark ? 'dark' : 'light');
+});
+
+        // ════════════════════════════════════════
+        // MOBILE HERO CAROUSEL
+        // Auto-cycle slides with dot indicators
+        // ════════════════════════════════════════
+        (function () {
+            const slides = document.querySelectorAll('.mobile-card-slide');
+            const dots = document.querySelectorAll('.mobile-tab-dot');
+            let mSlide = 0, mTimer = null;
+
+            function goTo(idx) {
+                slides.forEach((s, i) => s.classList.toggle('active', i === idx));
+                dots.forEach((d, i) => d.classList.toggle('active', i === idx));
+                mSlide = idx;
+            }
+
+            // Dot click
+            dots.forEach(d => d.addEventListener('click', () => {
+                clearInterval(mTimer);
+                goTo(parseInt(d.dataset.idx));
+                mTimer = setInterval(advance, 3000);
+            }));
+
+            function advance() { goTo((mSlide + 1) % slides.length); }
+            mTimer = setInterval(advance, 3000);
+        })();
+
+        // ════════════════════════════════════════
+        // SECTION 1: COMPANY-SPECIFIC
+        // ════════════════════════════════════════
+        const companyData = {
+            Google: [
+                { n: 'Maximum Subarray', t: '20 mins', d: 'med', tag: 'Arrays' },
+                { n: 'Word Ladder', t: '30 mins', d: 'hard', tag: 'Graph' },
+                { n: 'Trapping Rain Water', t: '25 mins', d: 'hard', tag: 'Arrays' },
+                { n: 'LRU Cache', t: '35 mins', d: 'med', tag: 'Design' },
+                { n: 'Valid Parentheses', t: '15 mins', d: 'easy', tag: 'Stack' },
+                { n: 'Median of Data Streams', t: '40 mins', d: 'hard', tag: 'Heap' },
+            ],
+            Amazon: [
+                { n: 'Merge Intervals', t: '25 mins', d: 'med', tag: 'Array' },
+                { n: 'Partition Equal Subset Sum', t: '25 mins', d: 'med', tag: 'DP' },
+                { n: 'Intersection of Two Linked Lists', t: '17 mins', d: 'easy', tag: 'Linked List' },
+                { n: 'Maximum Product Subarray', t: '22 mins', d: 'med', tag: 'Array' },
+                { n: 'Find the Duplicate Number', t: '15 mins', d: 'med', tag: 'Array' },
+                { n: 'Detect Cycle in Directed Graph', t: '25 mins', d: 'med', tag: 'Graph' },
+                { n: 'Valid Parentheses', t: '15 mins', d: 'easy', tag: 'Stack' },
+            ],
+            Stripe: [
+                { n: 'Two Sum', t: '10 mins', d: 'easy', tag: 'Array' },
+                { n: 'Longest Palindromic Substring', t: '30 mins', d: 'med', tag: 'String' },
+                { n: 'Jump Game', t: '20 mins', d: 'med', tag: 'Greedy' },
+                { n: 'Search in Rotated Array', t: '20 mins', d: 'med', tag: 'Binary Search' },
+                { n: 'Group Anagrams', t: '20 mins', d: 'med', tag: 'HashMap' },
+            ],
+            Netflix: [
+                { n: 'Number of Islands', t: '25 mins', d: 'med', tag: 'Graph' },
+                { n: 'Course Schedule', t: '30 mins', d: 'med', tag: 'Graph' },
+                { n: 'Longest Common Subsequence', t: '35 mins', d: 'med', tag: 'DP' },
+                { n: 'Coin Change', t: '25 mins', d: 'med', tag: 'DP' },
+                { n: 'Serialize and Deserialize BST', t: '40 mins', d: 'hard', tag: 'Trees' },
+            ],
+            Apple: [
+                { n: 'Longest Increasing Subsequence', t: '25 mins', d: 'med', tag: 'DP' },
+                { n: 'Detect Cycle in Directed Graph', t: '25 mins', d: 'med', tag: 'Graph' },
+                { n: 'Search in Rotated Sorted Array', t: '16 mins', d: 'easy', tag: 'Binary Search' },
+                { n: 'Two Sum', t: '10 mins', d: 'easy', tag: 'Array' },
+                { n: 'Rotate Image', t: '20 mins', d: 'med', tag: 'Matrix' },
+            ],
+            Facebook: [
+                { n: 'Merge K Sorted Lists', t: '35 mins', d: 'hard', tag: 'Heap' },
+                { n: 'Binary Tree Right Side View', t: '20 mins', d: 'med', tag: 'Trees' },
+                { n: 'Diameter of Binary Tree', t: '20 mins', d: 'easy', tag: 'Trees' },
+                { n: '4Sum', t: '30 mins', d: 'med', tag: 'Array' },
+                { n: 'Subarray Sum Equals K', t: '25 mins', d: 'med', tag: 'Prefix Sum' },
+            ],
+            Microsoft: [
+                { n: 'Longest Increasing Subsequence', t: '25 mins', d: 'med', tag: 'DP' },
+                { n: 'Partition Equal Subset Sum', t: '25 mins', d: 'med', tag: 'DP' },
+                { n: 'Intersection of Two Linked Lists', t: '17 mins', d: 'easy', tag: 'Linked List' },
+                { n: 'Maximum Product Subarray', t: '22 mins', d: 'med', tag: 'Array' },
+                { n: 'Find the Duplicate Number', t: '15 mins', d: 'med', tag: 'Array' },
+                { n: 'Detect Cycle in Directed Graph', t: '25 mins', d: 'med', tag: 'Graph' },
+            ]
+        };
+        const companies = Object.keys(companyData);
+        let tabIdx = 0, hlRowIdx = 0, curCo = companies[0];
+        const listWrap = document.getElementById('cpListWrap');
+
+        function badgeCls(d) { return d === 'easy' ? 'easy' : d === 'hard' ? 'hard' : 'med'; }
+        function renderList(co, hlIdx) {
+            const items = companyData[co];
+            return '<div class="cp-list" id="cpList">' +
+                items.map((it, i) => `<div class="cp-row${i === hlIdx ? ' hl' : ''}"><span class="cp-idx">${i + 1}</span><span class="cp-name">${it.n}</span><span class="cp-meta"><span class="badge ${badgeCls(it.d)}">${it.d}</span><span class="badge tag">${it.tag}</span><span class="cp-time">⏱ ${it.t}</span></span></div>`).join('') +
+                '</div>';
+        }
+        function switchCompany(company, idx) {
+            const old = listWrap.querySelector('.cp-list');
+            if (old) { old.classList.add('exiting'); setTimeout(() => old.remove(), 350); }
+            document.querySelectorAll('.cp-tab').forEach((t, i) => t.classList.toggle('active', i === idx));
+            setTimeout(() => { listWrap.insertAdjacentHTML('beforeend', renderList(company, 0)); }, 350);
+            curCo = company; hlRowIdx = 0;
+        }
+        listWrap.querySelector('#cpList').innerHTML = renderList(curCo, hlRowIdx);
+        setInterval(() => { tabIdx = (tabIdx + 1) % companies.length; switchCompany(companies[tabIdx], tabIdx); }, 2500);
+        setInterval(() => {
+            const rows = listWrap.querySelectorAll('.cp-row');
+            if (!rows.length) return;
+            rows.forEach(r => r.classList.remove('hl'));
+            hlRowIdx = (hlRowIdx + 1) % rows.length;
+            rows[hlRowIdx].classList.add('hl');
+        }, 1100);
+
+        // ════════════════════════════════════════
+        // SECTION 2: ROADMAP — STRAIGHT ROW
+        // All 4 nodes in a horizontal row.
+        // No SVG connectors — the hline behind them acts as the path.
+        // Still cycles active/done states with orange dashed connector lines
+        // between adjacent nodes.
+        // ════════════════════════════════════════
+        (function () {
+            const nodeIds = ['rn0', 'rn1', 'rn2', 'rn3'];
+            let rmStep = 0;
+
+            function getCenter(id, containerEl) {
+                const node = document.getElementById(id);
+                if (!node || !containerEl) return null;
+                const cr = containerEl.getBoundingClientRect();
+                const nr = node.getBoundingClientRect();
+                return { x: nr.left - cr.left + nr.width / 2, y: nr.top - cr.top + nr.height / 2 };
+            }
+
+            function drawConnectors(step) {
+                const svg = document.getElementById('rmapSvg');
+                const container = document.getElementById('roadmapContainer');
+                if (!svg || !container) return;
+                const w = container.offsetWidth, h = container.offsetHeight;
+                svg.setAttribute('viewBox', `0 0 ${w} ${h}`);
+                svg.setAttribute('width', w); svg.setAttribute('height', h);
+                svg.innerHTML = '';
+                // Draw dashed orange lines between consecutive done/active nodes
+                const pairs = [{ from: 'rn0', to: 'rn1', min: 1 }, { from: 'rn1', to: 'rn2', min: 2 }, { from: 'rn2', to: 'rn3', min: 3 }];
+                pairs.forEach(p => {
+                    if (step < p.min) return;
+                    const a = getCenter(p.from, container), b = getCenter(p.to, container);
+                    if (!a || !b) return;
+                    const line = document.createElementNS('http://www.w3.org/2000/svg', 'line');
+                    line.setAttribute('x1', a.x); line.setAttribute('y1', a.y);
+                    line.setAttribute('x2', b.x); line.setAttribute('y2', b.y);
+                    line.setAttribute('stroke', '#f97316'); line.setAttribute('stroke-width', '2.5');
+                    line.setAttribute('stroke-dasharray', '5 4'); line.setAttribute('opacity', '0.9');
+                    line.style.animation = 'dashFlow .8s linear infinite';
+                    svg.appendChild(line);
+                });
+            }
+
+            function updateRmap() {
+                nodeIds.forEach((id, i) => {
+                    const el = document.getElementById(id); if (!el) return;
+                    el.classList.remove('active', 'done');
+                    if (i < rmStep) el.classList.add('done');
+                    else if (i === rmStep) el.classList.add('active');
+                });
+                requestAnimationFrame(() => drawConnectors(rmStep));
+            }
+            setTimeout(() => updateRmap(), 200);
+            setInterval(() => { rmStep = (rmStep + 1) % 4; updateRmap(); }, 1800);
+            window.addEventListener('resize', () => requestAnimationFrame(() => drawConnectors(rmStep)));
+        })();
+
+        // ════════════════════════════════════════
+        // SECTION 3: DSA CARDS
+        // ════════════════════════════════════════
+        const dsaCards = document.querySelectorAll('#dsaPanel .dsa-card');
+        let dsaIdx = 2;
+        setInterval(() => { dsaCards.forEach(c => c.classList.remove('hl')); dsaIdx = (dsaIdx + 1) % dsaCards.length; dsaCards[dsaIdx].classList.add('hl'); }, 1400);
+
+        // ════════════════════════════════════════
+        // SECTION 4: INTERVIEW ROUNDS
+        // ════════════════════════════════════════
+        const roundRows = document.querySelectorAll('#roundsPanel .round-row');
+        let rrIdx = 2;
+        setInterval(() => { roundRows.forEach(r => r.classList.remove('hl')); rrIdx = (rrIdx + 1) % roundRows.length; roundRows[rrIdx].classList.add('hl'); }, 2000);
+
+        // ════════════════════════════════════════
+        // PRICING TABS
+        // ════════════════════════════════════════
+        document.querySelectorAll('.price-tabs').forEach(group => {
+            group.querySelectorAll('.price-tab').forEach(btn => {
+                btn.addEventListener('click', () => {
+                    group.querySelectorAll('.price-tab').forEach(b => b.classList.remove('active'));
+                    btn.classList.add('active');
+                });
+            });
+        });
+
+        // ════════════════════════════════════════
+        // FAQ — Categories + Accordion
+        // ════════════════════════════════════════
+        const faqData = {
+            subscription: [
+                { q: 'Will I get access to new features or content released in the future?', a: 'Absolutely! <strong>Pinnacle users</strong> receive all upcoming features and content at <strong>no additional cost</strong> throughout their subscription period.<br><br><strong>Sprint users</strong> can also enjoy upcoming content by upgrading their plan anytime.' },
+                { q: 'Will the videos be downloadable after the subscription ends?', a: 'No, videos cannot be downloaded. They are accessible only during your active subscription period through the Fundamentals+ platform.' },
+                { q: 'Can I upgrade from Sprint later?', a: 'Yes! You can upgrade from Sprint to Pinnacle at any time. The remaining value of your current plan will be adjusted against the upgrade cost.' },
+                { q: 'Can we extend the validity after expiry?', a: 'Yes, you can renew or extend your subscription before or after expiry. Contact support for the best renewal offers.' },
+            ],
+            features: [
+                { q: 'What AI features are included?', a: 'Fundamentals+ includes AI-powered personalized roadmaps, smart problem recommendations based on your weak areas, and AI code review giving instant feedback on your solutions.' },
+                { q: 'Is there a mobile app available?', a: 'Yes! Fundamentals+ is available on both iOS and Android. Access all content, track your progress, and practice problems on the go.' },
+                { q: 'How do the biweekly sessions work?', a: 'Every two weeks, live interactive sessions are held with expert instructors. Ask questions in real-time, get code reviews, and participate in Q&A.' },
+            ],
+            curriculum: [
+                { q: 'What topics are covered in the DSA curriculum?', a: 'Arrays, Strings, Linked Lists, Trees, Graphs, Dynamic Programming, Greedy, Backtracking, Bit Manipulation, Heaps, Tries — from basics to advanced.' },
+                { q: 'Does Fundamentals+ cover System Design?', a: 'Yes! Both Low Level Design (LLD) and High Level Design (HLD) — OOPs principles, design patterns, scalability concepts, and real-world case studies.' },
+                { q: 'Are there practice problems included?', a: 'Yes, each topic includes curated problems across difficulty levels. Pinnacle users also get company-specific question banks.' },
+            ],
+            account: [
+                { q: 'Is account sharing allowed?', a: 'No, account sharing is strictly not allowed. Each account is for individual use only.' },
+                { q: 'Can I use Fundamentals+ on multiple devices?', a: 'You can log in from multiple devices, but only one active session is allowed at a time.' },
+                { q: 'Can I delete my account permanently?', a: 'Yes, contact our support team for permanent account deletion. All progress and purchase history will be lost.' },
+                { q: 'Is my personal information secure?', a: 'Yes, we use industry-standard encryption. We never sell or share your data with third parties.' },
+                { q: 'Is Fundamentals+ globally accessible?', a: 'Yes! Fundamentals+ is accessible worldwide. Payments can be made in INR or via international payment methods.' },
+            ],
+            access: [
+                { q: 'What if I face technical issues with video playback?', a: 'Try clearing your browser cache, using a different browser, or checking your internet connection. Contact support with your device and browser details if the issue persists.' },
+                { q: 'Can I access Fundamentals+ offline?', a: 'Currently, Fundamentals+ does not support offline access. An active internet connection is required.' },
+            ],
+            mentorship: [
+                { q: 'How do I join the Fundamentals+ community?', a: 'After purchasing any plan, you get access to the exclusive Fundamentals+ Discord community with 1M+ learners.' },
+                { q: 'Are there mentorship sessions available?', a: 'Yes, Pinnacle plan members get access to periodic group mentorship sessions with experienced engineers from top companies.' },
+            ],
+            certification: [
+                { q: 'Do I get a certificate on completion?', a: 'Yes! After completing the curriculum and meeting assessment criteria, you receive a Fundamentals+ completion certificate shareable on LinkedIn.' },
+                { q: 'Is the certificate recognized by companies?', a: 'The certificate demonstrates your commitment and skill level, and is a great talking point in interviews.' },
+            ],
+            career: [
+                { q: 'Does Fundamentals+ provide placement assistance?', a: 'Fundamentals+ provides resume review, interview preparation, and access to our job board with curated openings from partnered companies.' },
+                { q: 'Are there mock interviews available?', a: 'Yes, Pinnacle members get mock interview sessions with experienced interviewers providing detailed feedback.' },
+            ],
+            internships: [
+                { q: 'Does Fundamentals+ help with internship placements?', a: 'Fundamentals+ has partnerships with various companies and regularly posts internship opportunities. Career guidance sessions also cover how to find and apply effectively.' },
+                { q: 'Is there a job assistance program?', a: 'Yes, Fundamentals+ Plus members get dedicated job assistance including resume reviews, referral connections, and interview prep resources.' },
+            ],
+            payment: [
+                { q: 'What payment methods are accepted?', a: 'All major credit/debit cards, UPI, net banking, and EMI options. International payments via credit card are also supported.' },
+                { q: 'Is there a refund policy?', a: 'We offer a 7-day refund policy for new subscribers. Refund requests after 7 days are evaluated case-by-case.' },
+                { q: 'Are there any EMI options available?', a: 'Yes! 3, 6, or 12 month EMI plans are available through select banks and payment providers during checkout.' },
+            ],
+        };
+        let activeCat = 'subscription', openIdx = 0;
+        function renderFaq(cat) {
+            const panel = document.getElementById('faqPanel');
+            const items = faqData[cat] || [];
+            panel.innerHTML = items.map((it, i) => `
+    <div class="faq-item${i === openIdx ? ' open' : ''}" data-idx="${i}">
+      <div class="faq-q"><span>${it.q}</span>
+        <svg class="faq-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
+      </div>
+      <div class="faq-a"><div class="faq-a-inner">${it.a}</div></div>
+    </div>`).join('');
+            panel.querySelectorAll('.faq-item').forEach(item => {
+                item.querySelector('.faq-q').addEventListener('click', () => {
+                    const isOpen = item.classList.contains('open');
+                    panel.querySelectorAll('.faq-item').forEach(it => it.classList.remove('open'));
+                    if (!isOpen) { item.classList.add('open'); openIdx = parseInt(item.dataset.idx); }
+                    else openIdx = -1;
+                });
+            });
+        }
+        document.querySelectorAll('.faq-cat').forEach(btn => {
+            btn.addEventListener('click', () => {
+                document.querySelectorAll('.faq-cat').forEach(b => b.classList.remove('active'));
+                btn.classList.add('active');
+                activeCat = btn.dataset.cat; openIdx = 0;
+                renderFaq(activeCat);
+            });
+        });
+        renderFaq(activeCat);
+    </script>
+</body>
+
+</html>
